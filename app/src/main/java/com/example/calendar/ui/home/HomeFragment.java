@@ -1,16 +1,12 @@
 package com.example.calendar.ui.home;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
-import static android.content.Context.ALARM_SERVICE;
 import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 
-import android.app.AlarmManager;
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.content.ClipboardManager;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -33,14 +29,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.calendar.AlarmReceiver;
 import com.example.calendar.R;
 import com.example.calendar.databinding.FragmentHomeBinding;
 import com.example.calendar.db.DBHandler;
@@ -58,7 +52,6 @@ import java.util.Map;
 public class HomeFragment extends Fragment implements ToolTipsManager.TipListener {
     static int[] idArrays = new int[]{R.id.d1, R.id.d2, R.id.d3, R.id.d4, R.id.d5,R.id.d6, R.id.d7, R.id.d8, R.id.d9, R.id.d10,R.id.d11, R.id.d12, R.id.d13, R.id.d14, R.id.d15,R.id.d16, R.id.d17, R.id.d18, R.id.d19, R.id.d20,R.id.d21, R.id.d22, R.id.d23, R.id.d24, R.id.d25,R.id.d26, R.id.d27, R.id.d28, R.id.d29, R.id.d30,R.id.d31, R.id.d32, R.id.d33, R.id.d34, R.id.d35,R.id.d36, R.id.d37, R.id.d38, R.id.d39, R.id.d40, R.id.d41, R.id.d42} ;
 
-    int ThisYear=-1;
     static String Wengelawi="";
     static  int Abekte,Metke,MeteneRabit,Mebacha,Wenber,Medeb,BealeMetke,MebajaHamer,Elet, AtsfeWer,NeneweMonth,Nenewe,
             Tinsae,TinsaeMonth,Enkutatash, Meskel, GenaTsom,Gena,Timket,Debretabor,Fisleta,AbiyTsom,AbiyTsomMonth,DebreZeyt,
@@ -79,8 +72,6 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
     private DBHandler dbHandler;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
         dbHandler = new DBHandler(getContext());
         toolTipsManager=new ToolTipsManager(this);
 
@@ -147,14 +138,11 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
             }
         });
 
-        decrease.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String year = yearInput.getText().toString();
-                if(!year.equals("")){
-                    int decreasedValue = Integer.parseInt(year)-1;
-                    yearInput.setText(decreasedValue+"");
-                }
+        decrease.setOnClickListener(view -> {
+            String year = yearInput.getText().toString();
+            if(!year.equals("")){
+                int decreasedValue = Integer.parseInt(year)-1;
+                yearInput.setText(decreasedValue+"");
             }
         });
         return root;
@@ -1013,8 +1001,6 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                     return;
                 }
                 dbHandler.addNewMemo(day, month, year, hour, minute, description, ampm);
-
-                OnToggleClicked(hour,minute,year,month,day,ampm);
                 Toast.makeText(getContext(), "Data has been added.", Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();
             }
@@ -1022,35 +1008,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
         alertDialog.show();
     }
 
-    public void OnToggleClicked(int hour, int minute,int year, int month, int day,String ampm) {
-//        long time;
-        Calendar calendar = Calendar.getInstance();
 
-        // calendar is called to get current time in hour and minute
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-        if (ampm.equals("AM")) {
-            calendar.set(Calendar.AM_PM, 0);
-        }else if(ampm.equals("PM")){
-            calendar.set(Calendar.AM_PM, 1);
-        }
-//        calendar.set(year,month,day);
-
-        AlarmManager am = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-
-//        Calendar cal = Calendar.getInstance();
-//        cal.add(Calendar.SECOND, sec);
-
-        long time = calendar.getTimeInMillis();
-
-        Intent i = new Intent(getContext(), AlarmReceiver.class);
-
-        PendingIntent pi = PendingIntent.getBroadcast(getActivity(), 0, i, PendingIntent.FLAG_IMMUTABLE);
-
-        am.set(AlarmManager.RTC_WAKEUP, time, pi);
-    }
 
     abstract class DoubleClickListener implements View.OnClickListener {
         private long lastClickTime = 0;

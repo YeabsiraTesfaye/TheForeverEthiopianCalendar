@@ -8,17 +8,13 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.Layout;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -27,7 +23,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -39,9 +34,6 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.calendar.AlarmReceiver;
-import com.example.calendar.AlarmSettings;
-import com.example.calendar.BootReceiver;
 import com.example.calendar.R;
 import com.example.calendar.databinding.FragmentDashboardBinding;
 import com.example.calendar.db.DBHandler;
@@ -361,25 +353,7 @@ public class DashboardFragment extends Fragment {
         alertDialog.show();
     }
 
-    SharedPreferences.OnSharedPreferenceChangeListener onChange = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if ("alarm".equals(key)){
-                boolean enabled = prefs.getBoolean(key,false);
-                int flag = (enabled ? PackageManager.COMPONENT_ENABLED_STATE_ENABLED : PackageManager.COMPONENT_ENABLED_STATE_DISABLED);
-                ComponentName component = new ComponentName(getContext(), BootReceiver.class);
-                getActivity().getPackageManager().setComponentEnabledSetting(component, flag, PackageManager.DONT_KILL_APP);
 
-                if (enabled) {
-                    BootReceiver.setAlarm(getContext());
-                } else {
-                    BootReceiver.cancelAlarm(getContext());
-                }
-            } else if ("alarm_time".equals(key)){
-                BootReceiver.cancelAlarm(getContext());
-                BootReceiver.setAlarm(getContext());
-            }
-        }
-    };
 
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
