@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="መስከረም" type="id"/>
+    <item name="ጥቅምት" type="id"/>
+    <item name="ህዳር" type="id"/>
+    <item name="ታህሳስ" type="id"/>
+    <item name="ጥር" type="id"/>
+    <item name="የካቲት" type="id"/>
+    <item name="መጋቢት" type="id"/>
+    <item name="ሚያዚያ" type="id"/>
+    <item name="ግንቦት" type="id"/>
+    <item name="ሰኔ" type="id"/>
+    <item name="ሀምሌ" type="id"/>
+    <item name="ነሀሴ" type="id"/>
+    <item name="ጳጉሜ" type="id"/>
+</resources>

@@ -1,0 +1,45 @@
+package com.example.calendar;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
+import java.util.Calendar;
+import java.util.Timer;
+public class BootReceiver extends BroadcastReceiver {
+
+    public static final void setAlarm(Context ctxt) {
+        AlarmManager mgr = (AlarmManager) ctxt.getSystemService(Context.ALARM_SERVICE);
+        Calendar cal = Calendar.getInstance();
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctxt);
+        String time = prefs.getString("alarm_time", "12:00");
+        System.out.println(time);
+//        cal.set(Calendar.HOUR_OF_DAY, Timer.getHour(time));
+//        cal.set(Calendar.MINUTE, Timer.getMinute(time));
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        
+        if (cal.getTimeInMillis() < System.currentTimeMillis()) {
+            cal.add(Calendar.DAY_OF_YEAR, 1);
+        }
+
+        mgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(),AlarmManager.INTERVAL_DAY, getPendingIntent(ctxt));
+    }
+
+    public static void cancelAlarm(Context ctxt) {
+        AlarmManager mgr = (AlarmManager) ctxt.getSystemService(Context.ALARM_SERVICE);
+        mgr.cancel(getPendingIntent(ctxt));
+    }
+
+    private static PendingIntent getPendingIntent(Context ctxt) {
+        Intent i = new Intent(ctxt, AlarmReceiver.class);
+        return(PendingIntent.getBroadcast(ctxt, 0, i, PendingIntent.FLAG_IMMUTABLE));
+    }
+
+    @Override
+    public void onReceive(Context ctxt, Intent intent) {setAlarm(ctxt);}
+}
