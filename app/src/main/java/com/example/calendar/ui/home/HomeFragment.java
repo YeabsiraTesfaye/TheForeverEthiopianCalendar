@@ -722,7 +722,6 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                                 void onDoubleClick(View v) {
                                     TextView tv = (TextView)v;
                                     btn_showMessage(tv,value+" "+tv.getText().toString()+" "+ yearInput.getText().toString(), key, value);
-                                    Toast.makeText(getContext(),value+" "+tv.getText().toString()+" "+ yearInput.getText().toString(),Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -733,6 +732,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                             if(counter[0] < 30+Mebacha){
                                 TextView day = calendarLayout.findViewById(idArrays[counter[0]++]);
                                 day.setText(ind+1+"");
+                                day.setTextColor(Color.parseColor("#000000"));
                                 day.setOnClickListener(new DoubleClickListener() {
                                     @Override
                                     void onDoubleClick(View v) {
@@ -746,6 +746,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                             if(counter[0] < 30+Mebacha){
                                 TextView day = calendarLayout.findViewById(idArrays[counter[0]++]);
                                 day.setText(ind+1+"");
+                                day.setTextColor(Color.parseColor("#000000"));
                                 day.setOnClickListener(new DoubleClickListener() {
                                     @Override
                                     void onDoubleClick(View v) {
@@ -762,100 +763,69 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
 
                 if(key == NeneweMonth){
                     TextView NeneweTV = calendarLayout.findViewById(idArrays[(Nenewe+Mebacha)-1]);
-                    NeneweTV.setBackgroundColor(Color.parseColor("#292928"));
-                    NeneweTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(NeneweTV, "ጾመ ነነዌ");
                 }
 
                 if(key == theMonth && theYear == Integer.parseInt(yearInput.getText().toString())){
                     TextView todayTV = calendarLayout.findViewById(idArrays[theDay+Mebacha-1]);
-                    todayTV.setTextSize(20);
                     todayTV.setTextColor(Color.BLUE);
                     todayTV.setTypeface(todayTV.getTypeface(), Typeface.BOLD_ITALIC);
-                    toaster(todayTV,"ዛሬ");
+                    todayTV.setTooltipText("ዛሬ");
                 }
                 if(Tinsae < 3){
                     if(key == TinsaeMonth-1){
                         int Seklet1 = Tinsae+Mebacha+27;
                         TextView SekletTV = calendarLayout.findViewById(idArrays[Seklet1]);
-                        SekletTV.setBackgroundColor(Color.parseColor("#292928"));
-                        SekletTV.setTextColor(Color.parseColor("#ffffff"));
                         toaster(SekletTV, "ስቅለት");
                     }
                 }
                 if(key == 1){
                     TextView EnkutatashTV = calendarLayout.findViewById(idArrays[Enkutatash]);
-                    EnkutatashTV.setBackgroundColor(Color.parseColor("#b22222"));
-                    EnkutatashTV.setTextColor(Color.parseColor("#ffffff"));
-
                     TextView MeskelTV = calendarLayout.findViewById(idArrays[Meskel]);
-                    MeskelTV.setBackgroundColor(Color.parseColor("#b22222"));
-                    MeskelTV.setTextColor(Color.parseColor("#ffffff"));
-
                     toaster(EnkutatashTV, "እንቁጣጣሽ");
                     toaster(MeskelTV, "መስቀል");
                 } else if(key == 3){
                     TextView GenaTsomTV = calendarLayout.findViewById(idArrays[GenaTsom]);
-                    GenaTsomTV.setBackgroundColor(Color.parseColor("#292928"));
-                    GenaTsomTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(GenaTsomTV, "የገና ፆም");
                 }
                 else if(key == 4){
                     TextView GenaTV = calendarLayout.findViewById(idArrays[Gena]);
-                    GenaTV.setBackgroundColor(Color.parseColor("#b22222"));
-                    GenaTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(GenaTV, "ገና");
                 } else if(key == 5){
                     TextView TimketTV = calendarLayout.findViewById(idArrays[Timket]);
-                    TimketTV.setBackgroundColor(Color.parseColor("#b22222"));
-                    TimketTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(TimketTV, "ጥምቀት");
                 } else if(key == 12){
                     TextView DebretaborTV = calendarLayout.findViewById(idArrays[Debretabor]);
-                    DebretaborTV.setBackgroundColor(Color.parseColor("#b22222"));
-                    DebretaborTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(DebretaborTV, "ደብረታቦር");
 
                     TextView FisletaTV = calendarLayout.findViewById(idArrays[Fisleta]);
-                    FisletaTV.setBackgroundColor(Color.parseColor("#292928"));
-                    FisletaTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(FisletaTV, "ጾመ ፍልሰታ");
                 } else if(key == TinsaeMonth){
                     int Tinsae1 = Tinsae + Mebacha - 1;
                     try {
                         TextView TinsaeTV = calendarLayout.findViewById(idArrays[Tinsae1]);
-                        TinsaeTV.setBackgroundColor(Color.parseColor("#b22222"));
-                        TinsaeTV.setTextColor(Color.parseColor("#ffffff"));
                         toaster(TinsaeTV, "ተንሳኤ");
                     }catch (Exception e){}
 
                     if(Tinsae > 2){
                         Seklet = Tinsae1-2;
                         TextView SekletTV = calendarLayout.findViewById(idArrays[Seklet]);
-                        SekletTV.setBackgroundColor(Color.parseColor("#b22222"));
-                        SekletTV.setTextColor(Color.parseColor("#ffffff"));
                         toaster(SekletTV, "ስቅለት");
                     }
 
                 } else if(key == AbiyTsomMonth){
                     AbiyTsom = (AbiyTsom + Mebacha - 1)%42;
                     TextView AbiyTsomTV = calendarLayout.findViewById(idArrays[AbiyTsom]);
-                    AbiyTsomTV.setBackgroundColor(Color.parseColor("#b22222"));
-                    AbiyTsomTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(AbiyTsomTV, "አብይ ፆም");
                 }
 
                 if(key == DebreZeytMonth){
                     TextView DebrezeytTV = calendarLayout.findViewById(idArrays[(DebreZeyt+Mebacha-1)]);
-                    DebrezeytTV.setBackgroundColor(Color.parseColor("#b22222"));
-                    DebrezeytTV.setTextColor(Color.parseColor("#ffffff"));
                     toaster(DebrezeytTV, "ደብረዘይት");
                 }
 
             if(key == HosaenaMonth){
                 TextView HosaenaTV = calendarLayout.findViewById(idArrays[(Hosaena+Mebacha-1)]);
-                HosaenaTV.setBackgroundColor(Color.parseColor("#b22222"));
-                HosaenaTV.setTextColor(Color.parseColor("#ffffff"));
                 toaster(HosaenaTV, "ሆሳህና");
             }
 
@@ -866,6 +836,11 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
             });
         }
     void toaster(TextView tv, String message){
+        tv.setTextColor(Color.parseColor("#b22222"));
+//                        SekletTV.setTextColor(Color.parseColor("#ffffff"));
+
+        tv.setTypeface(tv.getTypeface(), Typeface.BOLD_ITALIC);
+
         TooltipCompat.setTooltipText(tv,message);
     }
     @Override
