@@ -180,6 +180,8 @@ public class NotificationsFragment extends Fragment {
                             dayET.setText(dayET.getAdapter().getItem(4).toString(), false);
                         }
                     }
+                }else{
+                    resultGR.setText("");
                 }
                 if (!yearET.getEditText().getText().toString().equals("") && !monthET.getEditableText().toString().equals("") && !dayET.getEditableText().toString().equals("")) {
                     toGR(dayET.getText().toString(), monthET.getEditableText().toString(), yearET.getEditText().getText().toString());
@@ -250,6 +252,8 @@ public class NotificationsFragment extends Fragment {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (!dayGR.getEditableText().toString().equals("") && !monthGR.getEditableText().toString().equals("") && !yearGR.getEditText().getText().toString().equals("")) {
                     toET(dayGR.getEditableText().toString(), monthGR.getEditableText().toString(), yearGR.getEditText().getText().toString());
+                }else{
+                    resultET.setText("");
                 }
                 if (!yearGR.getEditText().getText().toString().equals("") && !monthGR.getEditableText().toString().equals("")) {
                     int monthId = monthsGR.get(monthGR.getEditableText().toString());

@@ -717,6 +717,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                         if(counter[0] < 30+Mebacha){
                             TextView day = calendarLayout.findViewById(idArrays[counter[0]++]);
                             day.setText(ind+1+"");
+                            day.setTextColor(Color.parseColor("#000000"));
                             day.setOnClickListener(new DoubleClickListener() {
                                 @Override
                                 void onDoubleClick(View v) {
@@ -768,7 +769,8 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
 
                 if(key == theMonth && theYear == Integer.parseInt(yearInput.getText().toString())){
                     TextView todayTV = calendarLayout.findViewById(idArrays[theDay+Mebacha-1]);
-                    todayTV.setTextColor(Color.BLUE);
+                    todayTV.setTextColor(Color.WHITE);
+                    todayTV.setBackgroundColor(Color.parseColor("#b22222"));
                     todayTV.setTypeface(todayTV.getTypeface(), Typeface.BOLD_ITALIC);
                     todayTV.setTooltipText("ዛሬ");
                 }
