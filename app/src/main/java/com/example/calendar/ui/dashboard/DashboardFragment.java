@@ -110,16 +110,6 @@ public class DashboardFragment extends Fragment {
                 memoModalArrayList.remove(position);
                 memoRVAdapter.notifyItemRemoved(position);
 
-//                Intent intent = new Intent(getContext(), AlarmReceiver.class);
-//                pendingIntent = PendingIntent.getBroadcast(getContext(), 0, intent, PendingIntent.FLAG_IMMUTABLE);
-//
-//                if (alarmManager == null){
-//                    alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-//
-//                }
-//                alarmManager.cancel(pendingIntent);
-//                Toast.makeText(getContext(), "Alarm Canceled", Toast.LENGTH_SHORT).show();
-
                 Snackbar.make(coursesRV, "delete memo?", Snackbar.LENGTH_LONG).setAction("Undo", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

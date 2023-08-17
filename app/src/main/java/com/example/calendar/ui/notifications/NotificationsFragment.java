@@ -78,287 +78,10 @@ public class NotificationsFragment extends Fragment {
         monthGR = root.findViewById(R.id.monthsGR);
         resultET = root.findViewById(R.id.resultET);
         resultGR = root.findViewById(R.id.resultGR);
-
-        String[] monthsResGR = getResources().getStringArray(R.array.monthsGR);
-        ArrayAdapter monthArrayAdapterGR = new ArrayAdapter(getContext(), R.layout.dropdown_menu, monthsResGR);
-        monthGR.setAdapter(monthArrayAdapterGR);
-
-
         monthET = root.findViewById(R.id.monthsET);
         yearET = root.findViewById(R.id.yearET);
-
-        String[] monthsResET = getResources().getStringArray(R.array.months);
-        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, monthsResET);
-        monthET.setAdapter(monthArrayAdapterET);
         dayET = root.findViewById(R.id.daysET);
-
-        monthET.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboardFrom(getContext(), yearGR);
-                hideKeyboardFrom(getContext(), yearET);
-            }
-        });
-        dayET.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboardFrom(getContext(), yearGR);
-                hideKeyboardFrom(getContext(), yearET);
-            }
-        });
-        monthET.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String day = dayET.getEditableText().toString();
-                if (!yearET.getEditText().getText().toString().equals("")) {
-                    if (i != 12) {
-                        String[] daysResET = getResources().getStringArray(R.array.days);
-                        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                        dayET.setAdapter(monthArrayAdapterET);
-                    } else {
-                        int year = Integer.parseInt(yearET.getEditText().getText().toString());
-                        if (year % 4 == 3) {
-                            String[] daysResET = getResources().getStringArray(R.array.puagume6);
-                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                            dayET.setAdapter(monthArrayAdapterET);
-                            if(!day.equals("")){
-                                if (Integer.parseInt(day) > 6) {
-                                    dayET.setText(dayET.getAdapter().getItem(5).toString(), false);
-                                }
-                            }
-
-                        } else {
-                            String[] daysResET = getResources().getStringArray(R.array.puagume5);
-                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                            dayET.setAdapter(monthArrayAdapterET);
-                            if(!day.equals("")){
-                                if (Integer.parseInt(day) > 5) {
-                                    dayET.setText(dayET.getAdapter().getItem(4).toString(), false);
-                                }
-                            }
-
-
-                        }
-                    }
-                }
-                if (!yearET.getEditText().getText().toString().equals("") && !monthET.getEditableText().toString().equals("") && !dayET.getEditableText().toString().equals("")) {
-                    toGR(dayET.getText().toString(), monthET.getEditableText().toString(), yearET.getEditText().getText().toString());
-                }
-
-            }
-        });
-        yearET.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!yearET.getEditText().getText().toString().equals("")) {
-                    int month = 0;
-                    for (Map.Entry<Integer, String> entry : monthsET.entrySet()) {
-                        if (entry.getValue().equals(monthET.getEditableText().toString())) {
-                            month = entry.getKey();
-                            break;
-                        }
-                    }
-                    if (month != 13) {
-                        String[] daysResET = getResources().getStringArray(R.array.days);
-                        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                        dayET.setAdapter(monthArrayAdapterET);
-                    } else {
-                        int year = Integer.parseInt(yearET.getEditText().getText().toString());
-                        if (year % 4 == 3) {
-                            String[] daysResET = getResources().getStringArray(R.array.puagume6);
-                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                            dayET.setAdapter(monthArrayAdapterET);
-                        } else {
-                            String[] daysResET = getResources().getStringArray(R.array.puagume5);
-                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                            dayET.setAdapter(monthArrayAdapterET);
-                            dayET.setText(dayET.getAdapter().getItem(4).toString(), false);
-                        }
-                    }
-                }else{
-                    resultGR.setText("");
-                }
-                if (!yearET.getEditText().getText().toString().equals("") && !monthET.getEditableText().toString().equals("") && !dayET.getEditableText().toString().equals("")) {
-                    toGR(dayET.getText().toString(), monthET.getEditableText().toString(), yearET.getEditText().getText().toString());
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        dayET.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (!yearET.getEditText().getText().toString().equals("")) {
-                    int month = 0;
-                    for (Map.Entry<Integer, String> entry : monthsET.entrySet()) {
-                        if (entry.getValue().equals(monthET.getEditableText().toString())) {
-                            month = entry.getKey();
-                            break;
-                        }
-                    }
-                    if (month != 13) {
-                        String[] daysResET = getResources().getStringArray(R.array.days);
-                        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                        dayET.setAdapter(monthArrayAdapterET);
-                    } else {
-                        int year = Integer.parseInt(yearET.getEditText().getText().toString());
-                        if (year % 4 == 3) {
-                            String[] daysResET = getResources().getStringArray(R.array.puagume6);
-                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                            dayET.setAdapter(monthArrayAdapterET);
-                        } else {
-                            String[] daysResET = getResources().getStringArray(R.array.puagume5);
-                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
-                            dayET.setAdapter(monthArrayAdapterET);
-                        }
-                    }
-                }
-                if (!yearET.getEditText().getText().toString().equals("") && !monthET.getEditableText().toString().equals("") && !dayET.getEditableText().toString().equals("")) {
-                    toGR(dayET.getText().toString(), monthET.getEditableText().toString(), yearET.getEditText().getText().toString());
-                }
-
-
-            }
-        });
-
-
-        monthGR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboardFrom(getContext(), yearGR);
-            }
-        });
-        dayGR.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboardFrom(getContext(), yearGR);
-            }
-        });
-        yearGR.getEditText().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!dayGR.getEditableText().toString().equals("") && !monthGR.getEditableText().toString().equals("") && !yearGR.getEditText().getText().toString().equals("")) {
-                    toET(dayGR.getEditableText().toString(), monthGR.getEditableText().toString(), yearGR.getEditText().getText().toString());
-                }else{
-                    resultET.setText("");
-                }
-                if (!yearGR.getEditText().getText().toString().equals("") && !monthGR.getEditableText().toString().equals("")) {
-                    int monthId = monthsGR.get(monthGR.getEditableText().toString());
-                    if (monthId == 1 || monthId == 3 || monthId == 5 || monthId == 7 || monthId == 8 || monthId == 10 || monthId == 12) {
-
-                        String[] dayResET = getResources().getStringArray(R.array.daysGR);
-                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                        dayGR.setAdapter(daysArrayAdapterET);
-                    } else if (monthId == 4 || monthId == 6 || monthId == 9 || monthId == 11) {
-                        String[] dayResET = getResources().getStringArray(R.array.days);
-                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                        dayGR.setAdapter(daysArrayAdapterET);
-                    } else if (monthId == 2) {
-                        if (Integer.parseInt(yearGR.getEditText().getText().toString()) % 4 == 0) {
-                            String[] dayResET = getResources().getStringArray(R.array.february29);
-                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                            dayGR.setAdapter(daysArrayAdapterET);
-                        } else {
-                            String[] dayResET = getResources().getStringArray(R.array.february28);
-                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                            dayGR.setAdapter(daysArrayAdapterET);
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-        monthGR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String day = dayGR.getEditableText().toString();
-                if (!yearGR.getEditText().getText().toString().equals("")) {
-                    if (i == 0 || i == 2 || i == 4 || i == 6 || i == 7 || i == 9 || i == 11) {
-
-                        String[] dayResET = getResources().getStringArray(R.array.daysGR);
-                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                        dayGR.setAdapter(daysArrayAdapterET);
-                    } else if (i == 3 || i == 5 || i == 8 || i == 10) {
-                        String[] dayResET = getResources().getStringArray(R.array.days);
-                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                        dayGR.setAdapter(daysArrayAdapterET);
-                    } else if (i == 1) {
-                        if (Integer.parseInt(yearGR.getEditText().getText().toString()) % 4 == 0) {
-                            String[] dayResET = getResources().getStringArray(R.array.february29);
-                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                            dayGR.setAdapter(daysArrayAdapterET);
-                            if(!day.equals("")){
-                                if (Integer.parseInt(day) > 29) {
-                                    dayGR.setText(dayGR.getAdapter().getItem(28).toString(), false);
-                                }
-                            }
-
-                        } else {
-                            String[] dayResET = getResources().getStringArray(R.array.february28);
-                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                            dayGR.setAdapter(daysArrayAdapterET);
-                            if(!day.equals("")){
-                                if (Integer.parseInt(day) > 28) {
-                                    dayGR.setText(dayGR.getAdapter().getItem(27).toString(), false);
-                                }
-                            }
-                        }
-                    }
-                }
-                if (!dayGR.getEditableText().toString().equals("") && !monthGR.getEditableText().toString().equals("") && !yearGR.getEditText().getText().toString().equals("")) {
-                    toET(dayGR.getEditableText().toString(), monthGR.getEditableText().toString(), yearGR.getEditText().getText().toString());
-                }
-            }
-        });
-        dayGR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (!dayGR.getEditableText().toString().equals("") && !monthGR.getEditableText().toString().equals("") && !yearGR.getEditText().getText().toString().equals("")) {
-                    toET(dayGR.getEditableText().toString(), monthGR.getEditableText().toString(), yearGR.getEditText().getText().toString());
-                }
-
-                if (!yearGR.getEditText().getText().toString().equals("")) {
-                    if (i == 0 || i == 2 || i == 4 || i == 6 || i == 7 || i == 9 || i == 11) {
-
-                        String[] dayResET = getResources().getStringArray(R.array.daysGR);
-                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                        dayGR.setAdapter(daysArrayAdapterET);
-                    } else if (i == 3 || i == 5 || i == 8 || i == 10) {
-                        String[] dayResET = getResources().getStringArray(R.array.days);
-                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                        dayGR.setAdapter(daysArrayAdapterET);
-                    } else if (i == 1) {
-                        if (Integer.parseInt(yearGR.getEditText().getText().toString()) % 4 == 0) {
-                            String[] dayResET = getResources().getStringArray(R.array.february29);
-                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                            dayGR.setAdapter(daysArrayAdapterET);
-                        } else {
-                            String[] dayResET = getResources().getStringArray(R.array.february28);
-                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
-                            dayGR.setAdapter(daysArrayAdapterET);
-                        }
-                    }
-                }
-            }
-        });
-
+        preSet();
         return root;
     }
 
@@ -1098,5 +821,288 @@ public class NotificationsFragment extends Fragment {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    @Override
+    public void onResume() {
+        preSet();
+        super.onResume();
+    }
 
+
+    public void preSet(){
+        String[] monthsResGR = getResources().getStringArray(R.array.monthsGR);
+        ArrayAdapter monthArrayAdapterGR = new ArrayAdapter(getContext(), R.layout.dropdown_menu, monthsResGR);
+        monthGR.setAdapter(monthArrayAdapterGR);
+
+
+        String[] monthsResET = getResources().getStringArray(R.array.months);
+        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, monthsResET);
+        monthET.setAdapter(monthArrayAdapterET);
+
+        monthET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeyboardFrom(getContext(), yearGR);
+                hideKeyboardFrom(getContext(), yearET);
+            }
+        });
+        dayET.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeyboardFrom(getContext(), yearGR);
+                hideKeyboardFrom(getContext(), yearET);
+            }
+        });
+        monthET.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String day = dayET.getEditableText().toString();
+                if (!yearET.getEditText().getText().toString().equals("")) {
+                    if (i != 12) {
+                        String[] daysResET = getResources().getStringArray(R.array.days);
+                        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                        dayET.setAdapter(monthArrayAdapterET);
+                    } else {
+                        int year = Integer.parseInt(yearET.getEditText().getText().toString());
+                        if (year % 4 == 3) {
+                            String[] daysResET = getResources().getStringArray(R.array.puagume6);
+                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                            dayET.setAdapter(monthArrayAdapterET);
+                            if(!day.equals("")){
+                                if (Integer.parseInt(day) > 6) {
+                                    dayET.setText(dayET.getAdapter().getItem(5).toString(), false);
+                                }
+                            }
+
+                        } else {
+                            String[] daysResET = getResources().getStringArray(R.array.puagume5);
+                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                            dayET.setAdapter(monthArrayAdapterET);
+                            if(!day.equals("")){
+                                if (Integer.parseInt(day) > 5) {
+                                    dayET.setText(dayET.getAdapter().getItem(4).toString(), false);
+                                }
+                            }
+
+
+                        }
+                    }
+                }
+                if (!yearET.getEditText().getText().toString().equals("") && !monthET.getEditableText().toString().equals("") && !dayET.getEditableText().toString().equals("")) {
+                    toGR(dayET.getText().toString(), monthET.getEditableText().toString(), yearET.getEditText().getText().toString());
+                }
+
+            }
+        });
+        yearET.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!yearET.getEditText().getText().toString().equals("")) {
+                    int month = 0;
+                    for (Map.Entry<Integer, String> entry : monthsET.entrySet()) {
+                        if (entry.getValue().equals(monthET.getEditableText().toString())) {
+                            month = entry.getKey();
+                            break;
+                        }
+                    }
+                    if (month != 13) {
+                        String[] daysResET = getResources().getStringArray(R.array.days);
+                        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                        dayET.setAdapter(monthArrayAdapterET);
+                    } else {
+                        int year = Integer.parseInt(yearET.getEditText().getText().toString());
+                        if (year % 4 == 3) {
+                            String[] daysResET = getResources().getStringArray(R.array.puagume6);
+                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                            dayET.setAdapter(monthArrayAdapterET);
+                        } else {
+                            String[] daysResET = getResources().getStringArray(R.array.puagume5);
+                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                            dayET.setAdapter(monthArrayAdapterET);
+                            dayET.setText(dayET.getAdapter().getItem(4).toString(), false);
+                        }
+                    }
+                }else{
+                    resultGR.setText("");
+                }
+                if (!yearET.getEditText().getText().toString().equals("") && !monthET.getEditableText().toString().equals("") && !dayET.getEditableText().toString().equals("")) {
+                    toGR(dayET.getText().toString(), monthET.getEditableText().toString(), yearET.getEditText().getText().toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        dayET.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!yearET.getEditText().getText().toString().equals("")) {
+                    int month = 0;
+                    for (Map.Entry<Integer, String> entry : monthsET.entrySet()) {
+                        if (entry.getValue().equals(monthET.getEditableText().toString())) {
+                            month = entry.getKey();
+                            break;
+                        }
+                    }
+                    if (month != 13) {
+                        String[] daysResET = getResources().getStringArray(R.array.days);
+                        ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                        dayET.setAdapter(monthArrayAdapterET);
+                    } else {
+                        int year = Integer.parseInt(yearET.getEditText().getText().toString());
+                        if (year % 4 == 3) {
+                            String[] daysResET = getResources().getStringArray(R.array.puagume6);
+                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                            dayET.setAdapter(monthArrayAdapterET);
+                        } else {
+                            String[] daysResET = getResources().getStringArray(R.array.puagume5);
+                            ArrayAdapter monthArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, daysResET);
+                            dayET.setAdapter(monthArrayAdapterET);
+                        }
+                    }
+                }
+                if (!yearET.getEditText().getText().toString().equals("") && !monthET.getEditableText().toString().equals("") && !dayET.getEditableText().toString().equals("")) {
+                    toGR(dayET.getText().toString(), monthET.getEditableText().toString(), yearET.getEditText().getText().toString());
+                }
+
+
+            }
+        });
+
+
+        monthGR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeyboardFrom(getContext(), yearGR);
+            }
+        });
+        dayGR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideKeyboardFrom(getContext(), yearGR);
+            }
+        });
+        yearGR.getEditText().addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!dayGR.getEditableText().toString().equals("") && !monthGR.getEditableText().toString().equals("") && !yearGR.getEditText().getText().toString().equals("")) {
+                    toET(dayGR.getEditableText().toString(), monthGR.getEditableText().toString(), yearGR.getEditText().getText().toString());
+                }else{
+                    resultET.setText("");
+                }
+                if (!yearGR.getEditText().getText().toString().equals("") && !monthGR.getEditableText().toString().equals("")) {
+                    int monthId = monthsGR.get(monthGR.getEditableText().toString());
+                    if (monthId == 1 || monthId == 3 || monthId == 5 || monthId == 7 || monthId == 8 || monthId == 10 || monthId == 12) {
+
+                        String[] dayResET = getResources().getStringArray(R.array.daysGR);
+                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                        dayGR.setAdapter(daysArrayAdapterET);
+                    } else if (monthId == 4 || monthId == 6 || monthId == 9 || monthId == 11) {
+                        String[] dayResET = getResources().getStringArray(R.array.days);
+                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                        dayGR.setAdapter(daysArrayAdapterET);
+                    } else if (monthId == 2) {
+                        if (Integer.parseInt(yearGR.getEditText().getText().toString()) % 4 == 0) {
+                            String[] dayResET = getResources().getStringArray(R.array.february29);
+                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                            dayGR.setAdapter(daysArrayAdapterET);
+                        } else {
+                            String[] dayResET = getResources().getStringArray(R.array.february28);
+                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                            dayGR.setAdapter(daysArrayAdapterET);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        monthGR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String day = dayGR.getEditableText().toString();
+                if (!yearGR.getEditText().getText().toString().equals("")) {
+                    if (i == 0 || i == 2 || i == 4 || i == 6 || i == 7 || i == 9 || i == 11) {
+
+                        String[] dayResET = getResources().getStringArray(R.array.daysGR);
+                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                        dayGR.setAdapter(daysArrayAdapterET);
+                    } else if (i == 3 || i == 5 || i == 8 || i == 10) {
+                        String[] dayResET = getResources().getStringArray(R.array.days);
+                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                        dayGR.setAdapter(daysArrayAdapterET);
+                    } else if (i == 1) {
+                        if (Integer.parseInt(yearGR.getEditText().getText().toString()) % 4 == 0) {
+                            String[] dayResET = getResources().getStringArray(R.array.february29);
+                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                            dayGR.setAdapter(daysArrayAdapterET);
+                            if(!day.equals("")){
+                                if (Integer.parseInt(day) > 29) {
+                                    dayGR.setText(dayGR.getAdapter().getItem(28).toString(), false);
+                                }
+                            }
+
+                        } else {
+                            String[] dayResET = getResources().getStringArray(R.array.february28);
+                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                            dayGR.setAdapter(daysArrayAdapterET);
+                            if(!day.equals("")){
+                                if (Integer.parseInt(day) > 28) {
+                                    dayGR.setText(dayGR.getAdapter().getItem(27).toString(), false);
+                                }
+                            }
+                        }
+                    }
+                }
+                if (!dayGR.getEditableText().toString().equals("") && !monthGR.getEditableText().toString().equals("") && !yearGR.getEditText().getText().toString().equals("")) {
+                    toET(dayGR.getEditableText().toString(), monthGR.getEditableText().toString(), yearGR.getEditText().getText().toString());
+                }
+            }
+        });
+        dayGR.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (!dayGR.getEditableText().toString().equals("") && !monthGR.getEditableText().toString().equals("") && !yearGR.getEditText().getText().toString().equals("")) {
+                    toET(dayGR.getEditableText().toString(), monthGR.getEditableText().toString(), yearGR.getEditText().getText().toString());
+                }
+
+                if (!yearGR.getEditText().getText().toString().equals("")) {
+                    if (i == 0 || i == 2 || i == 4 || i == 6 || i == 7 || i == 9 || i == 11) {
+
+                        String[] dayResET = getResources().getStringArray(R.array.daysGR);
+                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                        dayGR.setAdapter(daysArrayAdapterET);
+                    } else if (i == 3 || i == 5 || i == 8 || i == 10) {
+                        String[] dayResET = getResources().getStringArray(R.array.days);
+                        ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                        dayGR.setAdapter(daysArrayAdapterET);
+                    } else if (i == 1) {
+                        if (Integer.parseInt(yearGR.getEditText().getText().toString()) % 4 == 0) {
+                            String[] dayResET = getResources().getStringArray(R.array.february29);
+                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                            dayGR.setAdapter(daysArrayAdapterET);
+                        } else {
+                            String[] dayResET = getResources().getStringArray(R.array.february28);
+                            ArrayAdapter daysArrayAdapterET = new ArrayAdapter(getContext(), R.layout.dropdown_menu, dayResET);
+                            dayGR.setAdapter(daysArrayAdapterET);
+                        }
+                    }
+                }
+            }
+        });
+    }
 }

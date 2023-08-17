@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TableLayout
+        android:id="@+id/one"
+        android:background="@drawable/bg3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:background="@drawable/bg"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp" android:textSize="12dp"
+                android:background="#b22222"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:id="@+id/month"
+                android:text=""
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:paddingHorizontal="5dp">
+
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="ሰኞ"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="ማክሰኞ"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="ረቡዕ"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="ሐሙስ"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="አርብ"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="ቅዳሜ"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="100pt"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="እሁድ"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </TableRow>
+
+        <TableRow android:paddingHorizontal="5dp">
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d1"/>
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d2"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d3"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d4"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d5"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d6"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d7"/>
+            
+        </TableRow>
+        <TableRow android:paddingHorizontal="5dp">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d8"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d9"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d10"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d11"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d12"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d13"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d14"/>
+
+        </TableRow>
+        <TableRow android:paddingHorizontal="5dp">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d15"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d16"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d17"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d18"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d19"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d20"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d21"/>
+
+        </TableRow>
+        <TableRow android:paddingHorizontal="5dp">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d22"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d23"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d24"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d25"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d26"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d27"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d28"/>
+
+        </TableRow>
+        <TableRow android:paddingHorizontal="5dp">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d29"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d30"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d31"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d32"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d33"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d34"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d35"/>
+
+        </TableRow>
+        <TableRow android:paddingHorizontal="5dp">
+
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d36"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d37"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d38"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d39"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d40"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d41"/>
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                layout="@layout/cell_layout"
+                android:id="@+id/d42"/>
+
+        </TableRow>
+
+        
+    </TableLayout>
+ 
+
+</androidx.constraintlayout.widget.ConstraintLayout>

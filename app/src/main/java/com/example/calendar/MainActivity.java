@@ -2,6 +2,7 @@ package com.example.calendar;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, 1);
         }
-
+        startService(new Intent(this, Service.class));
         try {
             this.getSupportActionBar().hide();
         }
