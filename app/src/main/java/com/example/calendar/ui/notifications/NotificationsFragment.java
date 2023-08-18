@@ -69,7 +69,7 @@ public class NotificationsFragment extends Fragment {
         monthsET.put(8, "ሚያዚያ");
         monthsET.put(9, "ግንቦት");
         monthsET.put(10, "ሰኔ");
-        monthsET.put(11, "ምሌ");
+        monthsET.put(11, "ሃምሌ");
         monthsET.put(12, "ነሀሴ");
         monthsET.put(13, "ጳጉሜ");
 
@@ -805,6 +805,7 @@ public class NotificationsFragment extends Fragment {
                 dayGR = day + 5;
             }
         }
+        System.out.println(month+" "+day+" "+year);
         String monthsName = "";
         for (Map.Entry<String, Integer> entry : monthsGR.entrySet()) {
             if (entry.getValue().equals(monthGR)) {
