@@ -236,7 +236,7 @@ public class DashboardFragment extends Fragment {
         Button btn_okay = mView.findViewById(R.id.btn_okay);
         alert.setView(mView);
         final AlertDialog alertDialog = alert.create();
-        alertDialog.setCanceledOnTouchOutside(false);
+        alertDialog.setCanceledOnTouchOutside(true);
         dayET.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

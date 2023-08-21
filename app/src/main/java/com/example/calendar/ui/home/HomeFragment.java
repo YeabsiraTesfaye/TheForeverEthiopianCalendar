@@ -596,7 +596,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
 
 
     }
-    public static void calculateTheYear(int Year) {
+    public void calculateTheYear(int Year) {
         int WengelawiValue = (Year + 5500) % 4;
 
         if (WengelawiValue == 0) {
@@ -609,6 +609,12 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
             Wengelawi = "ሉቃስ";
         }
         TextView wongelawi = root.findViewById(R.id.wongelawi);
+        wongelawi.setOnClickListener(new DoubleClickListener() {
+            @Override
+            void onDoubleClick(View v) {
+
+            }
+        });
         wongelawi.setText("ዘመነ "+Wengelawi);
         MeteneRabit = (int) (((Year + 5500) / 4));
         Mebacha = (5500 + Year + MeteneRabit) % 7;
@@ -665,7 +671,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
 if(Nenewe == 0)
     Nenewe = 30;
         AbiyTsom = Nenewe + 14;
-        DebreZeyt = Nenewe + 11;
+        DebreZeyt = (Nenewe + 11)%30;
         Hosaena = (Nenewe + 2)%30;
         Seklet = Nenewe + 7;
         RekbeKahnat = Nenewe + 3;
@@ -675,21 +681,20 @@ if(Nenewe == 0)
             AbiyTsom = AbiyTsom%30;
             AbiyTsomMonth = AbiyTsomMonth + 1;
         }
-        TinsaeMonth = NeneweMonth + 2;
-        Tinsae = MebajaHamer + 9;
-        if(Tinsae > 30){
-            Tinsae = Tinsae%30;
-            TinsaeMonth = TinsaeMonth + 1;
-        }if(Nenewe <= 3){
-            TinsaeMonth = TinsaeMonth-1;
+        Tinsae = (MebajaHamer + 9)%30;
+        if(Tinsae == 0)
+            Tinsae = 30;
+        if(Nenewe > 21){
+            TinsaeMonth = NeneweMonth + 3;
+        }else{
+            TinsaeMonth =NeneweMonth + 2;
         }
         if(Tinsae > 23){
             DagmTinsaeMonth = TinsaeMonth+1;
-            DagmTinsae = (Tinsae+7)%30;
         }else{
             DagmTinsaeMonth = TinsaeMonth;
-            DagmTinsae = (Tinsae+7)%30;
         }
+        DagmTinsae = (Tinsae+7)%30;
         if(DagmTinsae == 0){
             DagmTinsae = 30;
         }
@@ -702,8 +707,8 @@ if(Nenewe == 0)
         }else{
             DebreZeytMonth = AbiyTsomMonth+1;
         }
-        if(DebreZeyt > 30){
-            DebreZeyt = DebreZeyt%30;
+        if(DebreZeyt == 0){
+            DebreZeyt = 30;
         }
 
         if(DebreZeyt <=9){
@@ -711,171 +716,7 @@ if(Nenewe == 0)
         }else{
             HosaenaMonth = DebreZeytMonth+1;
         }
-
-        System.out.println(NeneweMonth+" "+Nenewe+" ");
-
     }
-//    public void populateCalendar(LayoutInflater inflater, ViewGroup container){
-//        int[] counter = {Mebacha};
-//        months.forEach((key, value) -> {
-//            calendarLayout =  inflater.inflate(R.layout.calendar_layout, container, false);
-//                if (key != 13) {
-//                    if (key == 1) {
-//                        Enkutatash = Mebacha;
-//                        Meskel = Mebacha + 16;
-//                    }
-//                    if (key == 2) {
-//                        TsigeTsom = Mebacha + 15;
-//                    }
-//                    if (key == 3) {
-//                        GenaTsom = Mebacha+14;
-//                    }
-//                    if (key == 4) {
-//                        Gena = Mebacha + 28;
-//                    }
-//                    if (key == 5) {
-//                        Timket = Mebacha + 10;
-//                    }
-//                    if (key == 12) {
-//                        Debretabor = Mebacha + 12;
-//                        Fisleta = Mebacha;
-//                    }
-//                    for(int ind=0; ind<=idArrays.length-1; ind++){
-//                        if(counter[0] < 30+Mebacha){
-//                            TextView day = calendarLayout.findViewById(idArrays[counter[0]++]);
-//                            day.setText(ind+1+"");
-//                            day.setTextColor(Color.parseColor("#000000"));
-//                            day.setOnClickListener(view -> {
-//                                btn_showMessage(day,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
-//
-//                            });
-//                        }
-//                    }
-//                } else if(key == 13) {
-//                    if (Wengelawi=="ሉቃስ") {
-//                        for(int ind=0; ind<=idArrays.length-37; ind++){
-//                            if(counter[0] < 30+Mebacha){
-//                                TextView day = calendarLayout.findViewById(idArrays[counter[0]++]);
-//                                day.setText(ind+1+"");
-//                                day.setTextColor(Color.parseColor("#000000"));
-//                                day.setOnClickListener(view -> {
-//                                    btn_showMessage(day,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
-//                                });
-//                            }
-//                        }
-//                    } else {
-//                        for(int ind=0; ind<=idArrays.length-38; ind++){
-//                            if(counter[0] < 30+Mebacha){
-//                                TextView day = calendarLayout.findViewById(idArrays[counter[0]++]);
-//                                day.setText(ind+1+"");
-//                                day.setTextColor(Color.parseColor("#000000"));
-//                                day.setOnClickListener(view -> {
-//                                    btn_showMessage(day,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
-//                                });
-//                            }
-//                        }
-//                    }
-//                }
-//                TextView mtv = calendarLayout.findViewById(R.id.month);
-//                mtv.setText(value);
-//                mtv.setTag(value);
-//
-//                if(key == NeneweMonth){
-//                    TextView NeneweTV = calendarLayout.findViewById(idArrays[(Nenewe+Mebacha)-1]);
-//                    toaster(NeneweTV, "ጾመ ነነዌ",2);
-//                }
-//
-//                if(key == theMonth && theYear == Integer.parseInt(yearInput.getText().toString())){
-//                    TextView todayTV = calendarLayout.findViewById(idArrays[theDay+Mebacha-1]);
-//                    todayTV.setTextColor(Color.WHITE);
-//                    todayTV.setBackground(getResources().getDrawable(R.drawable.bgcelltoday));
-//
-//                    todayTV.setTypeface(todayTV.getTypeface(), Typeface.BOLD_ITALIC);
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                        todayTV.setTooltipText("ዛሬ");
-//                    }else{
-//                        Toast.makeText(getContext(),"ዛሬ",Toast.LENGTH_SHORT).show();
-//                    }
-//                }
-//                if(Tinsae < 3){
-//                    if(key == TinsaeMonth-1){
-//                        int Seklet1 = Tinsae+Mebacha+27;
-//                        TextView SekletTV = calendarLayout.findViewById(idArrays[Seklet1]);
-//                        toaster(SekletTV, "ስቅለት",1);
-//                    }
-//                }
-//                if(key == 1){
-//                    TextView EnkutatashTV = calendarLayout.findViewById(idArrays[Enkutatash]);
-//                    TextView MeskelTV = calendarLayout.findViewById(idArrays[Meskel]);
-//                    toaster(EnkutatashTV, "እንቁጣጣሽ",1);
-//                    toaster(MeskelTV, "መስቀል",1);
-//                } else if(key == 2){
-//                    TextView GenaTsomTV = calendarLayout.findViewById(idArrays[TsigeTsom]);
-//                    toaster(GenaTsomTV, "የፅጌ ፆም",2);
-//                }else if(key == 3){
-//                    TextView GenaTsomTV = calendarLayout.findViewById(idArrays[GenaTsom]);
-//                    toaster(GenaTsomTV, "የገና ፆም",2);
-//                }
-//                else if(key == 4){
-//                    TextView GenaTV = calendarLayout.findViewById(idArrays[Gena]);
-//                    toaster(GenaTV, "ገና",1);
-//                } else if(key == 5){
-//                    TextView TimketTV = calendarLayout.findViewById(idArrays[Timket]);
-//                    toaster(TimketTV, "ጥምቀት",1);
-//                } else if(key == 12){
-//                    TextView DebretaborTV = calendarLayout.findViewById(idArrays[Debretabor]);
-//                    toaster(DebretaborTV, "ደብረታቦር",1);
-//
-//                    TextView FisletaTV = calendarLayout.findViewById(idArrays[Fisleta]);
-//                    toaster(FisletaTV, "ጾመ ፍልሰታ",2);
-//                } else if(key == TinsaeMonth){
-//                    int Tinsae1 = Tinsae + Mebacha - 1;
-//                    try {
-//                        TextView TinsaeTV = calendarLayout.findViewById(idArrays[Tinsae1]);
-//                        toaster(TinsaeTV, "ተንሳኤ",1);
-//                    }catch (Exception e){}
-//
-//                    if(Tinsae > 2){
-//                        Seklet = Tinsae1-2;
-//                        TextView SekletTV = calendarLayout.findViewById(idArrays[Seklet]);
-//                        toaster(SekletTV, "ስቅለት",1);
-//                    }
-//
-//                } else if(key == AbiyTsomMonth){
-//                    AbiyTsom = (AbiyTsom + Mebacha - 1)%42;
-//                    TextView AbiyTsomTV = calendarLayout.findViewById(idArrays[AbiyTsom]);
-//                    toaster(AbiyTsomTV, "አብይ ፆም",2);
-//                }
-//
-//                if(key == DebreZeytMonth){
-//                    TextView DebrezeytTV = calendarLayout.findViewById(idArrays[(DebreZeyt+Mebacha-1)]);
-//                    toaster(DebrezeytTV, "ደብረዘይት",1);
-//                }
-//
-//                if(key == HosaenaMonth){
-//                    TextView HosaenaTV = calendarLayout.findViewById(idArrays[(Hosaena+Mebacha-1)]);
-//                    toaster(HosaenaTV, "ሆሳህና",1);
-//                }
-//                if(key == DagmTinsaeMonth){
-//                    TextView DagmTinsaeTV = calendarLayout.findViewById(idArrays[(DagmTinsae+Mebacha-1)]);
-//                    toaster(DagmTinsaeTV,"ዳግም ትንሳኤ",1);
-//                }
-//
-//                counter[0] = counter[0]%7;
-//
-//                Mebacha = counter[0];
-//                ArrayList<MemoModal> getMemo = dbHandler.readMemo();
-//                for(MemoModal m: getMemo){
-//                    if(m.getYear() == Integer.parseInt(yearInput.getEditableText().toString())){
-//                        if(key == m.getMonth()){
-//                            ViewParent memo = calendarLayout.findViewById(idArrays[m.getDay()+Mebacha-1]).getParent();
-//
-//                        }
-//                    }
-//                }
-//                ll.addView(calendarLayout);
-//            });
-//        }
 public void populateCalendar(LayoutInflater inflater, ViewGroup container){
     int[] counter = {Mebacha};
     months.forEach((key, value) -> {
@@ -890,9 +731,13 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
             }
             if (key == 3) {
                 GenaTsom = Mebacha+14;
+                if(Wengelawi=="ዩሃንስ")
+                    GenaTsom = Mebacha+13;
             }
             if (key == 4) {
                 Gena = Mebacha + 28;
+                if(Wengelawi=="ዩሃንስ")
+                    Gena = Mebacha + 27;
             }
             if (key == 5) {
                 Timket = Mebacha + 10;
@@ -904,8 +749,6 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
             for(int ind=0; ind<=idArrays.length-1; ind++){
                 if(counter[0] < 30+Mebacha){
                     ConstraintLayout cl = calendarLayout.findViewById(idArrays[counter[0]++]);
-//                    View cellLayout = inflater.inflate(R.layout.cell_layout, container, false);
-//
                     TextView day = cl.findViewById(R.id.d);
                     day.setText(ind+1+"");
                     day.setTextColor(Color.parseColor("#000000"));
@@ -919,8 +762,6 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
                 for(int ind=0; ind<=idArrays.length-37; ind++){
                     if(counter[0] < 30+Mebacha){
                         ConstraintLayout cl = calendarLayout.findViewById(idArrays[counter[0]++]);
-//                        View cellLayout = inflater.inflate(R.layout.cell_layout, container, false);
-    //
                         TextView day = cl.findViewById(R.id.d);
                         day.setText(ind+1+"");
                         day.setTextColor(Color.parseColor("#000000"));
@@ -933,8 +774,6 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
                 for(int ind=0; ind<=idArrays.length-38; ind++){
                     if(counter[0] < 30+Mebacha){
                         ConstraintLayout cl = calendarLayout.findViewById(idArrays[counter[0]++]);
-//                        View cellLayout = inflater.inflate(R.layout.cell_layout, container, false);
-//
                         TextView day = cl.findViewById(R.id.d);
                         day.setText(ind+1+"");
                         day.setTextColor(Color.parseColor("#000000"));
@@ -954,23 +793,6 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
             toaster(cl, "ጾመ ነነዌ",2);
         }
 
-        if(key == theMonth && theYear == Integer.parseInt(yearInput.getText().toString())){
-
-            View cl = calendarLayout.findViewById(idArrays[theDay+Mebacha-1]);
-            TextView tv = cl.findViewById(R.id.d);
-
-            tv.setTextColor(Color.WHITE);
-            tv.setTypeface(tv.getTypeface(), Typeface.BOLD_ITALIC);
-            cl.setBackground(getResources().getDrawable(R.drawable.bgcelltoday));
-            String number = tv.getText().toString();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                TooltipCompat.setTooltipText(tv, "ዛሬ");
-            }else{
-                Toast.makeText(getActivity().getApplicationContext(), "ዛሬ", Toast.LENGTH_SHORT).show();
-            }
-
-
-        }
         if(Tinsae < 3){
             if(key == TinsaeMonth-1){
                 int Seklet1 = Tinsae+Mebacha+27;
@@ -1003,20 +825,20 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
             View cl2 = calendarLayout.findViewById(idArrays[Fisleta]);
             toaster(cl2, "ጾመ ፍልሰታ",2);
         } else if(key == TinsaeMonth){
-            int Tinsae1 = Tinsae + Mebacha - 1;
+            Tinsae = Tinsae + Mebacha - 1;
             try {
-                View cl = calendarLayout.findViewById(idArrays[Tinsae1]);
+                View cl = calendarLayout.findViewById(idArrays[Tinsae]);
                 toaster(cl, "ተንሳኤ",1);
             }catch (Exception e){}
 
             if(Tinsae > 2){
-                Seklet = Tinsae1-2;
+                Seklet = Tinsae-2;
                 View cl = calendarLayout.findViewById(idArrays[Seklet]);
                 toaster(cl, "ስቅለት",1);
             }
 
         } else if(key == AbiyTsomMonth){
-            AbiyTsom = (AbiyTsom + Mebacha - 1)%42;
+            AbiyTsom = (AbiyTsom + Mebacha - 1);
             View cl = calendarLayout.findViewById(idArrays[AbiyTsom]);
             toaster(cl, "አብይ ፆም",2);
         }
@@ -1035,6 +857,46 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
             toaster(cl,"ዳግም ትንሳኤ",1);
         }
 
+
+        if(theYear == Integer.parseInt(yearInput.getText().toString())){
+
+            View cl = calendarLayout.findViewById(idArrays[theDay+Mebacha-1]);
+            if(key == theMonth)
+                toaster(cl, "ዛሬ",3);
+            if(theMonth == 1 && theDay+Mebacha-1 == Enkutatash){
+                toaster(cl, "ዛሬ + እንቁጣጣሽ",3);
+            }else if(theMonth == 1 && theDay+Mebacha-1 == Meskel){
+                toaster(cl, "ዛሬ + መስቀል",3);
+            }else if(theMonth == 3 && theDay+Mebacha-1 == GenaTsom){
+                toaster(cl, "ዛሬ + የገና ጾም",3);
+            }else if(theMonth == 4 && theDay+Mebacha-1 == Gena){
+                toaster(cl, "ዛሬ + ገና",3);
+            }else if(theMonth == 5 && theDay+Mebacha-1 == Timket){
+                toaster(cl, "ዛሬ + ጥምቀት",3);
+            }else if(theMonth == TinsaeMonth && theDay+Mebacha-1 == Tinsae){
+                toaster(cl, "ዛሬ + ትንሳኤ",3);
+            }else if(theMonth == AbiyTsomMonth && theDay+Mebacha-1 == AbiyTsom){
+                toaster(cl, "ዛሬ + ዓብይ ጾም",3);
+            }else if(theMonth == NeneweMonth && theDay+Mebacha-1 == Nenewe){
+                toaster(cl, "ዛሬ + ጾመ ነነዌ",3);
+            }else if(theMonth == DebreZeytMonth && theDay+Mebacha-1 == DebreZeyt){
+                toaster(cl, "ዛሬ + ደብረዘይት",3);
+            }else if(theMonth == 2 && theDay+Mebacha-1 == TsigeTsom){
+                toaster(cl, "ዛሬ + ጽጌ ጾመ",3);
+            }else if(theMonth == TinsaeMonth && theDay+Mebacha-1 == Seklet){
+                toaster(cl, "ዛሬ + ስክተት",3);
+            }else if(theMonth == DagmTinsaeMonth && theDay+Mebacha-1 == DagmTinsae){
+                toaster(cl, "ዛሬ + ዳግም ትንሳኤ",3);
+            }else if(theMonth == 12 && theDay+Mebacha-1 == Fisleta){
+                toaster(cl, "ዛሬ + ጾመ ፍስለታ",3);
+            }
+            else if(theMonth == 12 && theDay+Mebacha-1 == Debretabor){
+                toaster(cl, "ዛሬ + ደብረታቦር",3);
+            }
+
+            System.out.println(AbiyTsom+" "+AbiyTsomMonth+" "+(theDay+Mebacha-1));
+        }
+
         counter[0] = counter[0]%7;
 
         Mebacha = counter[0];
@@ -1042,7 +904,7 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
         for(MemoModal m: getMemo){
             if(m.getYear() == Integer.parseInt(yearInput.getEditableText().toString())){
                 if(key == m.getMonth()){
-                    View memo = calendarLayout.findViewById(idArrays[m.getDay()-1]);
+                    View memo = calendarLayout.findViewById(idArrays[m.getDay()+Mebacha-3]);
                     ImageView notification = memo.findViewById(R.id.n);
                     notification.setVisibility(View.VISIBLE);
                 }
@@ -1069,6 +931,16 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
             tv.setTextColor(Color.parseColor("#000000"));
             tv.setTypeface(tv.getTypeface(), Typeface.BOLD_ITALIC);
             v.setBackground(getResources().getDrawable(R.drawable.bgcell2));
+            String number = tv.getText().toString();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                TooltipCompat.setTooltipText(tv, message);
+            }else{
+                Toast.makeText(getActivity().getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+            }
+        }else if(type == 3){
+            tv.setTextColor(Color.parseColor("#FFFFFF"));
+            tv.setTypeface(tv.getTypeface(), Typeface.BOLD_ITALIC);
+            v.setBackground(getResources().getDrawable(R.drawable.bgcelltoday));
             String number = tv.getText().toString();
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 TooltipCompat.setTooltipText(tv, message);
@@ -1222,6 +1094,7 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
     }
 
     abstract class DoubleClickListener implements View.OnClickListener {
+        int counter = 1;
         private long lastClickTime = 0;
         private long DOUBLE_CLICK_TIME_DELTA = 300;
         @Override
@@ -1230,7 +1103,13 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
             TextView tv = (TextView)v;
             tv.performLongClick();
             if (clickTime - lastClickTime < DOUBLE_CLICK_TIME_DELTA) {
+                counter += 1;
                 onDoubleClick(v);
+            }else{
+                counter = 1;
+            }
+            if(counter == 5){
+                Toast.makeText(getContext(),"Developed by Yeabsira Tesfaye", Toast.LENGTH_SHORT).show();
             }
             lastClickTime = clickTime;
         }

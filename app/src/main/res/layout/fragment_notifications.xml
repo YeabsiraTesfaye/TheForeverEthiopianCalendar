@@ -33,18 +33,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="60dp">
+        android:background="#F1F1F1"
+        android:layout_marginBottom="55dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#ECECEC"
+            android:background="@drawable/bg3"
             android:layout_margin="20dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="ወደ ኢትዮጵያ"
-                android:background="#851515"
+                android:background="@drawable/bg"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -116,6 +117,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxStrokeWidth="0dp"
                 android:layout_marginHorizontal="10dp">
                 <AutoCompleteTextView
                     android:id="@+id/resultET"
@@ -128,27 +130,17 @@
                     android:textColor="@color/black"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-
-
-
-
-
-
-
-
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="#ECECEC"
+            android:background="@drawable/bg3"
             android:layout_margin="20dp">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="ወደ ግሪጎሪያን"
-                android:background="#851515"
+                android:background="@drawable/bg"
                 android:textColor="@color/white"
                 android:textSize="20dp"
                 android:textStyle="bold"
@@ -220,6 +212,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxStrokeWidth="0dp"
                 android:layout_marginHorizontal="10dp">
                 <AutoCompleteTextView
                     android:id="@+id/resultGR"

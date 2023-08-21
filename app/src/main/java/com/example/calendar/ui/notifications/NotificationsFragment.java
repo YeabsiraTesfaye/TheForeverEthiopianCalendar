@@ -84,13 +84,11 @@ public class NotificationsFragment extends Fragment {
         preSet();
         return root;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
     public void toET(String dayGR, String monthGR, String yearGR) {
         int day = -1;
         int month = -1;
@@ -498,7 +496,6 @@ public class NotificationsFragment extends Fragment {
         }
         resultET.setText(dayName + " " + monthsET.get(month) + " " + day + " " + year);
     }
-
     public void toGR(String dayET, String monthET, String yearET) {
 
         int day = Integer.parseInt(dayET);
@@ -816,20 +813,24 @@ public class NotificationsFragment extends Fragment {
         resultGR.setText(monthsName + " " + dayGR + " " + yearGR);
 
     }
-
     public static void hideKeyboardFrom(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
     @Override
     public void onResume() {
         preSet();
         super.onResume();
     }
-
-
     public void preSet(){
+        dayET.setText("");
+        monthET.setText("");
+        yearET.getEditText().setText("");
+        resultET.setText("");
+        dayGR.setText("");
+        monthGR.setText("");
+        yearGR.getEditText().setText("");
+        resultGR.setText("");
         String[] monthsResGR = getResources().getStringArray(R.array.monthsGR);
         ArrayAdapter monthArrayAdapterGR = new ArrayAdapter(getContext(), R.layout.dropdown_menu, monthsResGR);
         monthGR.setAdapter(monthArrayAdapterGR);
