@@ -5,6 +5,8 @@ import static android.content.Context.CLIPBOARD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
 import android.app.AlertDialog;
 import android.content.ClipboardManager;
 import android.content.SharedPreferences;
@@ -19,7 +21,6 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -42,6 +43,7 @@ import com.example.calendar.R;
 import com.example.calendar.databinding.FragmentHomeBinding;
 import com.example.calendar.db.DBHandler;
 import com.example.calendar.db.MemoModal;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tomergoldst.tooltips.ToolTipsManager;
 
 
@@ -55,6 +57,9 @@ import java.util.Map;
 
 
 public class HomeFragment extends Fragment implements ToolTipsManager.TipListener {
+     Animator front_anim;
+    Animator back_anim;
+    Boolean isFront =true;
     static int[] idArrays = new int[]{R.id.d1, R.id.d2, R.id.d3, R.id.d4, R.id.d5,R.id.d6, R.id.d7, R.id.d8, R.id.d9, R.id.d10,R.id.d11, R.id.d12, R.id.d13, R.id.d14, R.id.d15,R.id.d16, R.id.d17, R.id.d18, R.id.d19, R.id.d20,R.id.d21, R.id.d22, R.id.d23, R.id.d24, R.id.d25,R.id.d26, R.id.d27, R.id.d28, R.id.d29, R.id.d30,R.id.d31, R.id.d32, R.id.d33, R.id.d34, R.id.d35,R.id.d36, R.id.d37, R.id.d38, R.id.d39, R.id.d40, R.id.d41, R.id.d42} ;
 
     static String Wengelawi="";
@@ -100,6 +105,85 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
         months.put(13, "ጳጉሜን");
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
+
+
+
+
+
+
+
+
+
+        // Now Create Animator Object
+        // For this we add animator folder inside res
+        // Now we will add the animator to our card
+        // we now need to modify the camera scale
+        float scale = getContext().getResources().getDisplayMetrics().density;
+
+        View front = root.findViewById(R.id.front);
+        View back = root.findViewById(R.id.back);
+        FloatingActionButton flip = root.findViewById(R.id.inf);
+
+        front.setCameraDistance(8000 * scale);
+        back.setCameraDistance(8000 * scale);
+
+
+        // Now we will set the front animation
+        front_anim = AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
+        back_anim = AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
+
+        // Now we will set the event listener
+        flip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isFront)
+                {
+                    front_anim.setTarget(front);
+                    back_anim.setTarget(back);
+                    front_anim.start();
+                    back_anim.start();
+                    isFront = false;
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            front.setVisibility(View.INVISIBLE);
+//                            back.setVisibility(View.VISIBLE);
+                            flip.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.baseline_calendar_month_24));
+                        }
+                    };
+                    handler.postDelayed(runnable, 500);
+
+                }
+                else
+                {
+                    front_anim.setTarget(back);
+                    back_anim.setTarget(front);
+                    back_anim.start();
+                    front_anim.start();
+                    isFront =true;
+                    Handler handler = new Handler();
+                    Runnable runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            front.setVisibility(View.VISIBLE);
+//                            back.setVisibility(View.INVISIBLE);
+                            flip.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.cross));
+
+                        }
+                    };
+                    handler.postDelayed(runnable, 500);
+                }
+            }
+        });
+
+
+
+
+
+
+
+
         yearInput = root.findViewById(R.id.yearInput);
         ll = root.findViewById(R.id.calendars);
         scrollView = root.findViewById(R.id.scrollVIew);
@@ -181,11 +265,20 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
 
 //        Calendar today = Calendar.getInstance();
         int thisYear=-1;
-        if(todaysMonth == 9 && todaysDay >= 11){
-            thisYear = todaysYear-7;
-        }else if(todaysMonth == 9 && todaysDay < 11){
-            thisYear = todaysYear-8;
-        }else if(todaysMonth < 9){
+        if(todaysYear%4 == 3){
+            if(todaysMonth == 9 && todaysDay <= 11){
+                thisYear = todaysYear-8;
+            }else if(todaysMonth == 9 && todaysDay > 11){
+                thisYear = todaysYear-7;
+            }
+        }else{
+            if(todaysMonth == 9 && todaysDay <= 10){
+                thisYear = todaysYear-8;
+            }else if(todaysMonth == 9 && todaysDay > 10){
+                thisYear = todaysYear-7;
+            }
+        }
+        if(todaysMonth < 9){
             thisYear = todaysYear-8;
         }else if(todaysMonth > 9){
             thisYear = todaysYear-7;
@@ -301,29 +394,41 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                 if(Wengelawi.equals("ሉቃስ")){
                     if(todaysDay >5 && todaysDay <= 11){
                         month = 13;
-                        day = (todaysDay + 25)%30;
+                        day = (todaysDay + 25)%6;
+                        if(day == 0){
+                            day = 6;
+                        }
+                    }
+                    year = todaysYear-8;
+                    if(todaysDay > 11){
+                        month = 1;
+                        day = (todaysDay+25)%30 - 5;
+                        if(day == 0){
+                            day = 30;
+                        }
+                        year = todaysYear-7;
+                    }
+                }
+                else{
+                    if(todaysDay >5 && todaysDay <= 10){
+                        month = 13;
+                        day = (todaysDay + 25)%5;
                         if(day == 0){
                             day = 5;
                         }
                     }
                     year = todaysYear-8;
-                }
-                else{
-                    month = 13;
-                    day = (todaysDay + 25)%30;
-                    if(day == 0){
-                        day = 5;
+                    if(todaysDay > 10){
+                        month = 1;
+                        day = (todaysDay+25)%30 - 5;
+                        if(day == 0){
+                            day = 30;
+                        }
+                        year = todaysYear-7;
                     }
-                    year = todaysYear-8;
+
                 }
-                if(todaysDay > 10){
-                    month = 1;
-                    day = (todaysDay+25)%30 - 5;
-                    if(day == 0){
-                        day = 30;
-                    }
-                    year = todaysYear-7;
-                }
+
             }
             if(todaysMonth == 10){
                 if(todaysDay >= 1 && todaysDay <= 9){
@@ -894,7 +999,6 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
                 toaster(cl, "ዛሬ + ደብረታቦር",3);
             }
 
-            System.out.println(AbiyTsom+" "+AbiyTsomMonth+" "+(theDay+Mebacha-1));
         }
 
         counter[0] = counter[0]%7;
@@ -1122,5 +1226,11 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
         if (ContextCompat.checkSelfPermission(getContext(), POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{POST_NOTIFICATIONS}, 1);
         }
+    }
+
+    @Override
+    public void onResume() {
+        isFront = true;
+        super.onResume();
     }
 }

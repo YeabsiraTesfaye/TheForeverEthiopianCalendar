@@ -507,7 +507,6 @@ public class NotificationsFragment extends Fragment {
                 break;
             }
         }
-        System.out.println(month);
         int year = Integer.parseInt(yearET);
 
         int dayGR = 0;
@@ -802,7 +801,6 @@ public class NotificationsFragment extends Fragment {
                 dayGR = day + 5;
             }
         }
-        System.out.println(month+" "+day+" "+year);
         String monthsName = "";
         for (Map.Entry<String, Integer> entry : monthsGR.entrySet()) {
             if (entry.getValue().equals(monthGR)) {

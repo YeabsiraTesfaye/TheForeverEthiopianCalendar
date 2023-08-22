@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,89 +8,794 @@
     android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
     <LinearLayout
-        android:paddingTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:background="#212529">
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="0"
-            android:paddingLeft="10dp"
-            android:inputType="number"
-            android:gravity="left"
-            android:textStyle="bold"
-            android:textSize="25dp"
-            android:textColor="@color/white"
-            android:id="@+id/yearInput"
-            android:layout_gravity="center"
-            android:maxLength="10" />
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageButton
-                android:layout_width="25dp"
-                android:id="@+id/increase"
-                android:layout_height="25dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/baseline_keyboard_arrow_up_24"/>
-            <ImageButton
-                android:layout_width="25dp"
-                android:id="@+id/decrease"
-                android:layout_height="25dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/baseline_keyboard_arrow_down_24"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/today"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:paddingVertical="10dp"
-            android:text="0000"
-            android:layout_gravity="center"
-            android:textColor="@color/white"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Year"
-            android:id="@+id/wongelawi"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:paddingRight="10dp"
-            android:textStyle="bold"
-            android:textSize="15dp"
-            android:layout_gravity="center"
-            android:textColor="@color/white"/>
-    </LinearLayout>
-
-    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/scrollVIew"
-        android:layout_marginBottom="55dp">
+        android:orientation="vertical"
+        android:layout_marginBottom="70dp"
+        android:id="@+id/back">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/calendars"
-            android:background="#F1F1F1"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:orientation="vertical">
-
+            android:layout_height="100dp"
+            android:background="#212529"
+            android:orientation="horizontal"
+            android:paddingTop="40dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="ክብረ በዓላት"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold" />
         </LinearLayout>
-    </ScrollView>
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/calendars"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_marginBottom="60dp"/>-->
-</LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="40dp">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="1"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center|left"
+                        android:paddingTop="5dp"
+                        android:text="ልደታ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="2"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="3"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center|left"
+                        android:paddingTop="5dp"
+                        android:text="በዓታ ማርያም" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="4"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ዮሃንስ ወልደ ነጎድጓድ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="5"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="አቡዬ ገብረ መንፈስቅዱስ ፣ ጴጥሮስ ወ ጳውሎስ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="6"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቁስቋም" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="7"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቅድስት ስላሴ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="8"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="9"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቶማስ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="10"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="11"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ሐና እና እያቄም" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="12"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቅዱስ ሚካኤል" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="13"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="እግዚአብሄር አብ ፣ ሩፋኤል" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="14"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="አቡነ አረጋዊ ፣ ገብረ ክርስቶስ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="15"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቂርቆስ እና እየሉጣ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="16"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ኪዳነ ምህረት" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="17"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቅዱስ እስጢፋኖስ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="18"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="19"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቅዱስ ገብር" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="20"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="21"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቅድስት ማርያም" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="22"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ቅዱስ ዑራኤል" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="23"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ሰማእቱ ጊዮርጊስ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="24"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="ተክለሀይማኖት" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="25"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="26"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="27"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="መድሃኔዐለም" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="28"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="አማኑኤል" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="29"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="በዓል ወልድ" />
+                </TableRow>
+                <TableRow>
+
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="center"
+                        android:paddingTop="5dp"
+                        android:text="30"/>
+                    <TextView
+                        android:background="@drawable/bg2"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:layout_height="40dp"
+                        android:textSize="12dp"
+                        android:gravity="left|center"
+                        android:paddingTop="5dp"
+                        android:text="መጥምቀ ዮሃንስ ፣ ቅዱስ ማርቆስ" />
+                </TableRow>
+            </TableLayout>
+        </ScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/front"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#212529"
+            android:orientation="horizontal"
+            android:paddingTop="40dp">
+
+            <EditText
+                android:id="@+id/yearInput"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:inputType="number"
+                android:maxLength="10"
+                android:paddingLeft="10dp"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/increase"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/baseline_keyboard_arrow_up_24" />
+
+                <ImageButton
+                    android:id="@+id/decrease"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/baseline_keyboard_arrow_down_24" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <TextView
+                android:id="@+id/today"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="10dp"
+                android:text="0000"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/wongelawi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="10dp"
+                android:text="Year"
+                android:textColor="@color/white"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollVIew"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="55dp">
+
+            <LinearLayout
+                android:id="@+id/calendars"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F1F1F1"
+                android:orientation="vertical"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+            </LinearLayout>
+        </ScrollView>
+
+        <!--    <androidx.recyclerview.widget.RecyclerView-->
+        <!--        android:id="@+id/calendars"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="match_parent"-->
+        <!--        android:layout_marginBottom="60dp"/>-->
+    </LinearLayout>
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/inf"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="70dp"
+        android:src="@drawable/cross"
+        app:maxImageSize="30dp"
+        android:tint="@color/backgroundColor"
+        app:tint="@color/white"
+        android:backgroundTint="#b22222"
+        app:borderWidth="0dp"
+        app:fabCustomSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
