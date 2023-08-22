@@ -13,7 +13,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:orientation="vertical">
-
+    <TextView
+        android:id="@+id/id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
         <!--text view for our course name-->
         <TextView
             android:id="@+id/date1"

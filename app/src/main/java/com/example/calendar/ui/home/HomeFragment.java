@@ -102,7 +102,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
         months.put(10, "ሰኔ");
         months.put(11, "ሀምሌ");
         months.put(12, "ነሀሴ");
-        months.put(13, "ጳጉሜን");
+        months.put(13, "ጳጉሜ");
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
 

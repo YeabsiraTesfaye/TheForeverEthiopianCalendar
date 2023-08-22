@@ -82,7 +82,7 @@ public class DashboardFragment extends Fragment {
         months.put("ሰኔ", 10);
         months.put("ሀምሌ", 11);
         months.put("ነሀሴ", 12);
-        months.put("ጳጉሜን", 13);
+        months.put("ጳጉሜ", 13);
 
         memoModalArrayList = new ArrayList<>();
         dbHandler = new DBHandler(getContext());
@@ -120,13 +120,14 @@ public class DashboardFragment extends Fragment {
                 }).show();
             }
         }).attachToRecyclerView(coursesRV);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 displayDialog();
             }
         });
+
+
 
         return root;
     }
