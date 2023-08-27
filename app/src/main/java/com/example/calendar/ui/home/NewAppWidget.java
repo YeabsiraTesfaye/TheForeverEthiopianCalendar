@@ -1,14 +1,14 @@
 package com.example.calendar.ui.home;
 
-import android.app.AlarmManager;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.example.calendar.R;
 
-import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.HashMap;
 
@@ -17,18 +17,28 @@ import java.util.HashMap;
  */
 public class NewAppWidget extends AppWidgetProvider {
 
-    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
-                                int appWidgetId) {
-
-
-
-        toET(context, appWidgetManager,appWidgetId);
-
-    }
+    public static final String ACTION_AUTO_UPDATE =
+            "com.example.exampleWidget.AUTO_UPDATE";
 
     @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        if(intent!=null && intent.getAction()!=null &&
+                intent.getAction().equals(ACTION_AUTO_UPDATE)){
+            onUpdate(context);
+        }
+    }
+
+    private void onUpdate(Context context) {
+        AppWidgetManager appWidgetManager =
+                AppWidgetManager.getInstance(context);
+        ComponentName thisAppWidgetComponentName = new ComponentName(context.getPackageName(),getClass().getName());
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidgetComponentName);
+        onUpdate(context, appWidgetManager, appWidgetIds);
+    }
+    @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
+        // There may be multiple widgets active, so update all
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -36,14 +46,25 @@ public class NewAppWidget extends AppWidgetProvider {
 
     @Override
     public void onEnabled(Context context) {
-        // Enter relevant functionality for when the first widget is created
+        super.onEnabled(context);
+        WidgetNotification.scheduleWidgetUpdate(context);
+    }
 
+    private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+        //CODE TO UPDATE YOUR WIDGET VIEW
+        toET(context, appWidgetManager, appWidgetId);
+    }
+
+    @Override
+    public void onDeleted(Context context, int[] appWidgetIds) {
+        super.onDeleted(context, appWidgetIds);
+        WidgetNotification.clearWidgetUpdate(context);
     }
 
     @Override
     public void onDisabled(Context context) {
-        // Enter relevant functionality for when the last widget is disabled
-
+        super.onDisabled(context);
+        WidgetNotification.clearWidgetUpdate(context);
     }
 
     public static void toET(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
