@@ -4,6 +4,8 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Handler;
@@ -93,11 +95,22 @@ public class Service extends android.app.Service {
 
         NotificationCompat.Builder mBuild = new NotificationCompat.Builder(this, id+"");
         NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
+        long[] pattern = {500,500,500,500,500,500,500,500,500};
         mBuild.setContentTitle(title)
                 .setContentText(message)
                 .setSmallIcon(R.drawable.logo)
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pendingIntent)
+                .setVibrate(pattern);
+        mBuild.setStyle(new NotificationCompat.InboxStyle());
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+        if(alarmSound == null){
+            alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+            if(alarmSound == null){
+                alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            }
+        }
+        mBuild.setSound(alarmSound);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)  {
             NotificationChannel channel =
                     new NotificationChannel(id+"", "Event",

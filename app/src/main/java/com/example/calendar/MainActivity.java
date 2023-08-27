@@ -2,10 +2,14 @@ package com.example.calendar;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -35,7 +39,35 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[]{POST_NOTIFICATIONS}, 1);
         }
+
+        ComponentName componentName = new ComponentName(
+                getApplicationContext(),
+                Service.class);
+
+        getApplicationContext().getPackageManager().setComponentEnabledSetting(
+                componentName,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+                PackageManager.DONT_KILL_APP);
+
+
+        PowerManager powerManager = (PowerManager) getApplicationContext().getSystemService(POWER_SERVICE);
+        String packageName = "org.traccar.client";
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Intent i = new Intent();
+
+            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+                i.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                i.setData(Uri.parse("package:" + packageName));
+                startActivity(i);
+            }
+        }
+
         startService(new Intent(this, Service.class));
+
+
+
+
         try {
             this.getSupportActionBar().hide();
         }

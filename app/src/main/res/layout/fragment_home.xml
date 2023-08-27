@@ -61,7 +61,7 @@
                         android:textSize="12dp"
                         android:gravity="center|left"
                         android:paddingTop="5dp"
-                        android:text="ልደታ" />
+                        android:text="ልደታ ፣ ራጉኤል ፣ ኤልያስ" />
                 </TableRow>
                 <TableRow>
 
@@ -80,9 +80,9 @@
                         android:layout_weight="1"
                         android:layout_height="40dp"
                         android:textSize="12dp"
-                        android:gravity="center"
+                        android:gravity="center|left"
                         android:paddingTop="5dp"
-                        android:text="" />
+                        android:text="ታዴዎስ ሐዋርያ ፣ ኢዮብ ጻዲቅ" />
                 </TableRow>
                 <TableRow>
 
@@ -103,7 +103,7 @@
                         android:textSize="12dp"
                         android:gravity="center|left"
                         android:paddingTop="5dp"
-                        android:text="በዓታ ማርያም" />
+                        android:text="በዓታ ማርያም ፣ ዜና ማርቆስ ፣ ነአኩቶ ለአብ" />
                 </TableRow>
                 <TableRow>
 
@@ -145,7 +145,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="አቡዬ ገብረ መንፈስቅዱስ ፣ ጴጥሮስ ወ ጳውሎስ" />
+                        android:text="አቡነ ገብረ መንፈስቅዱስ ፣ ጴጥሮስ ወ ጳውሎስ" />
                 </TableRow>
                 <TableRow>
 
@@ -166,7 +166,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ቁስቋም" />
+                        android:text="ኢየሱስ ፣ ቁስቋም ፣ አርሴማ ቅድስት" />
                 </TableRow>
                 <TableRow>
 
@@ -187,7 +187,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ቅድስት ስላሴ" />
+                        android:text="ቅድስት ስላሴ፣ ፊሊሞን ፣ አብላንዮስ" />
                 </TableRow>
                 <TableRow>
 
@@ -206,9 +206,9 @@
                         android:layout_weight="1"
                         android:layout_height="40dp"
                         android:textSize="12dp"
-                        android:gravity="center"
+                        android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="" />
+                        android:text="ማቲዎስ ፣ ዮልያኖስ፣ አባ ኪሮስ" />
                 </TableRow>
                 <TableRow>
 
@@ -229,7 +229,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ቶማስ" />
+                        android:text="ቶማስ ሐዋርያ ፣ እንድርያስ ሐዋርያ ፣ አውሳብዮስ ፣ አርባ ሰማእታት" />
                 </TableRow>
                 <TableRow>
 
@@ -250,7 +250,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="" />
+                        android:text="በአለ መስቀሉ ለእግዚእነ" />
                 </TableRow>
                 <TableRow>
 
@@ -271,7 +271,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ሐና እና እያቄም" />
+                        android:text="ሐና እና እያቄም ፣ ቅዱስ ፋሲለደስ ሰማእት" />
                 </TableRow>
                 <TableRow>
 
@@ -292,7 +292,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ቅዱስ ሚካኤል" />
+                        android:text="ቅዱስ ሚካኤል ፣ ክርስቶስ ሠምራ" />
                 </TableRow>
                 <TableRow>
 
@@ -313,7 +313,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="እግዚአብሄር አብ ፣ ሩፋኤል" />
+                        android:text="እግዚአብሄር አብ ፣ ቅዱስ ሩፋኤል" />
                 </TableRow>
                 <TableRow>
 
@@ -418,7 +418,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="" />
+                        android:text="ፊሊጶስ ሐዋሪያ ፣ ኤስድሮስ ሐዋሪያ ፣ ኤዎስጣጤዎስ ሰማእት" />
                 </TableRow>
                 <TableRow>
 
@@ -439,7 +439,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ቅዱስ ገብር" />
+                        android:text="ቅዱስ ገብርኤል" />
                 </TableRow>
                 <TableRow>
 
@@ -460,7 +460,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="" />
+                        android:text="ጽንሰተ ማሪያም ፣ ነቢዩ ኤልያስ ፣ ሐጌ ነብይ ፣ አባ ሰላማ መተርጎም" />
                 </TableRow>
                 <TableRow>
 
@@ -481,7 +481,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ቅድስት ማርያም" />
+                        android:text="ዕለተ እግዝተነ ማርያም" />
                 </TableRow>
                 <TableRow>
 
@@ -544,7 +544,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="ተክለሀይማኖት" />
+                        android:text="አቡነ ተክለሀይማኖት" />
                 </TableRow>
                 <TableRow>
 
@@ -565,7 +565,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="" />
+                        android:text="መርቆሪዎስ ፣ ኢፍኖስ" />
                 </TableRow>
                 <TableRow>
 
@@ -586,7 +586,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="" />
+                        android:text="ሆሴአ ነብይ ፣ ሳዶቅ ሰማእት" />
                 </TableRow>
                 <TableRow>
 
@@ -649,7 +649,7 @@
                         android:textSize="12dp"
                         android:gravity="left|center"
                         android:paddingTop="5dp"
-                        android:text="በዓል ወልድ" />
+                        android:text="በዓለ ወልድ" />
                 </TableRow>
                 <TableRow>
 

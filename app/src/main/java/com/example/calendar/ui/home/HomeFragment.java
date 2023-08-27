@@ -18,7 +18,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -100,20 +102,17 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
         months.put(8, "ሚያዚያ");
         months.put(9, "ግንቦት");
         months.put(10, "ሰኔ");
-        months.put(11, "ሀምሌ");
+        months.put(11, "ሐምሌ");
         months.put(12, "ነሀሴ");
         months.put(13, "ጳጉሜ");
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         root = binding.getRoot();
-
-
-
-
-
-
-
-
-
+        yearInput = root.findViewById(R.id.yearInput);
+        ll = root.findViewById(R.id.calendars);
+        scrollView = root.findViewById(R.id.scrollVIew);
+        increase = root.findViewById(R.id.increase);
+        decrease = root.findViewById(R.id.decrease);
+        swipeToChange(scrollView);
         // Now Create Animator Object
         // For this we add animator folder inside res
         // Now we will add the animator to our card
@@ -177,18 +176,6 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
             }
         });
 
-
-
-
-
-
-
-
-        yearInput = root.findViewById(R.id.yearInput);
-        ll = root.findViewById(R.id.calendars);
-        scrollView = root.findViewById(R.id.scrollVIew);
-        increase = root.findViewById(R.id.increase);
-        decrease = root.findViewById(R.id.decrease);
         DisplayTodayeDate();
         populateCalendar(inflater,container);
         duration();
@@ -773,8 +760,8 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
             Nenewe=Nenewe%30;
             NeneweMonth+=1;
         }
-if(Nenewe == 0)
-    Nenewe = 30;
+        if(Nenewe == 0)
+            Nenewe = 30;
         AbiyTsom = Nenewe + 14;
         DebreZeyt = (Nenewe + 11)%30;
         Hosaena = (Nenewe + 2)%30;
@@ -822,7 +809,7 @@ if(Nenewe == 0)
             HosaenaMonth = DebreZeytMonth+1;
         }
     }
-public void populateCalendar(LayoutInflater inflater, ViewGroup container){
+    public void populateCalendar(LayoutInflater inflater, ViewGroup container){
     int[] counter = {Mebacha};
     months.forEach((key, value) -> {
         calendarLayout =  inflater.inflate(R.layout.calendar_layout2, container, false);
@@ -860,6 +847,8 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
                     day.setOnClickListener(view -> {
                         btn_showMessage(cl,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
                     });
+                    swipeToChange(day);
+
                 }
             }
         } else if(key == 13) {
@@ -873,6 +862,8 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
                         day.setOnClickListener(view -> {
                             btn_showMessage(cl,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
                         });
+                        swipeToChange(day);
+
                     }
                 }
             } else {
@@ -885,6 +876,7 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
                         day.setOnClickListener(view -> {
                             btn_showMessage(cl,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
                         });
+                        swipeToChange(day);
                     }
                 }
             }
@@ -892,7 +884,7 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
         TextView mtv = calendarLayout.findViewById(R.id.month);
         mtv.setText(value);
         mtv.setTag(value);
-
+        swipeToChange(mtv);
         if(key == NeneweMonth){
             View cl = calendarLayout.findViewById(idArrays[(Nenewe+Mebacha)-1]);
             toaster(cl, "ጾመ ነነዌ",2);
@@ -1007,13 +999,18 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
         ArrayList<MemoModal> getMemo = dbHandler.readMemo();
         for(MemoModal m: getMemo){
             if(m.getYear() == Integer.parseInt(yearInput.getEditableText().toString())){
-                if(key == m.getMonth()){
+                if(key == m.getMonth() && m.getMonth() != 13){
                     View memo = calendarLayout.findViewById(idArrays[m.getDay()+Mebacha-3]);
+                    ImageView notification = memo.findViewById(R.id.n);
+                    notification.setVisibility(View.VISIBLE);
+                }else if(key == m.getMonth() && m.getMonth() == 13){
+                    View memo = calendarLayout.findViewById(idArrays[m.getDay()+Mebacha]);
                     ImageView notification = memo.findViewById(R.id.n);
                     notification.setVisibility(View.VISIBLE);
                 }
             }
         }
+        swipeToChange(calendarLayout);
         ll.addView(calendarLayout);
     });
 }
@@ -1232,5 +1229,48 @@ public void populateCalendar(LayoutInflater inflater, ViewGroup container){
     public void onResume() {
         isFront = true;
         super.onResume();
+    }
+
+    public void swipeToChange(View v){
+        final GestureDetector gesture = new GestureDetector(getActivity(),
+                new GestureDetector.SimpleOnGestureListener() {
+
+                    @Override
+                    public boolean onDown(MotionEvent e) {
+                        return true;
+                    }
+
+                    @Override
+                    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
+                                           float velocityY) {
+//                        Log.i(Constants.APP_TAG, "onFling has been called!");
+                        final int SWIPE_MIN_DISTANCE = 120;
+                        final int SWIPE_MAX_OFF_PATH = 250;
+                        final int SWIPE_THRESHOLD_VELOCITY = 200;
+                        try {
+                            if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+                                return false;
+                            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+                                    && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                                increase.performClick();
+//                                Log.i(Constants.APP_TAG, "Right to Left");
+                            } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
+                                    && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                                decrease.performClick();
+//                                Log.i(Constants.APP_TAG, "Left to Right");
+                            }
+                        } catch (Exception e) {
+                            // nothing
+                        }
+                        return super.onFling(e1, e2, velocityX, velocityY);
+                    }
+                });
+
+        v.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gesture.onTouchEvent(event);
+            }
+        });
     }
 }

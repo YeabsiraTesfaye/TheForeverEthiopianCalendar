@@ -30,6 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -80,7 +81,7 @@ public class DashboardFragment extends Fragment {
         months.put("ሚያዚያ", 8);
         months.put("ግንቦት", 9);
         months.put("ሰኔ", 10);
-        months.put("ሀምሌ", 11);
+        months.put("ሐምሌ", 11);
         months.put("ነሀሴ", 12);
         months.put("ጳጉሜ", 13);
 
@@ -91,10 +92,11 @@ public class DashboardFragment extends Fragment {
 
         memoRVAdapter = new MemoRVAdapter(memoModalArrayList, getContext());
         coursesRV = root.findViewById(R.id.idRVCourses);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         coursesRV.setLayoutManager(linearLayoutManager);
         coursesRV.setAdapter(memoRVAdapter);
+
+
         fab = root.findViewById(R.id.add_person_fab);
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override

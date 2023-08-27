@@ -22,9 +22,11 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.calendar.R;
+import com.example.calendar.ui.notifications.NotificationsFragment;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
@@ -57,7 +59,7 @@ public class MemoRVAdapter extends RecyclerView.Adapter<MemoRVAdapter.ViewHolder
 		months.put("ሚያዚያ", 8);
 		months.put("ግንቦት", 9);
 		months.put("ሰኔ", 10);
-		months.put("ሀምሌ", 11);
+		months.put("ሐምሌ", 11);
 		months.put("ነሀሴ", 12);
 		months.put("ጳጉሜ", 13);
 
@@ -71,7 +73,7 @@ public class MemoRVAdapter extends RecyclerView.Adapter<MemoRVAdapter.ViewHolder
 		months1.put(8, "ሚያዚያ");
 		months1.put(9, "ግንቦት");
 		months1.put(10, "ሰኔ");
-		months1.put(11, "ሀምሌ");
+		months1.put(11, "ሐምሌ");
 		months1.put(12, "ነሀሴ");
 		months1.put(13, "ጳጉሜ");
 
@@ -96,8 +98,7 @@ public class MemoRVAdapter extends RecyclerView.Adapter<MemoRVAdapter.ViewHolder
 		holder.description.setText(modal.getDescription());
 		holder.id.setText(modal.getId()+"");
 		holder.itemView.setOnClickListener(view -> {
-			displayDialog(modal.getDay()+"", modal.getMonth(), modal.getYear()+"", modal.getMinute(), modal.getHour(),modal.getDescription(),modal.getAmpm(), modal.getId());
-			notifyDataSetChanged();
+			displayDialog(modal.getDay()+"", modal.getMonth(), modal.getYear()+"", modal.getMinute(), modal.getHour(),modal.getDescription(),modal.getAmpm(), modal.getId(),position);
 		});
 	}
 
@@ -126,7 +127,7 @@ public class MemoRVAdapter extends RecyclerView.Adapter<MemoRVAdapter.ViewHolder
 
 
 
-	void displayDialog(String dayd, int monthd, String yeard, int minuted, int hourd, String Descriptiond, String am_pmd,int id){
+	void displayDialog(String dayd, int monthd, String yeard, int minuted, int hourd, String Descriptiond, String am_pmd,int id, int position){
 		final AlertDialog.Builder alert = new AlertDialog.Builder(context);
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View mView = inflater.inflate(R.layout.custom_dialog_2,null);
@@ -144,7 +145,7 @@ public class MemoRVAdapter extends RecyclerView.Adapter<MemoRVAdapter.ViewHolder
 		final TimePicker timePicker = mView.findViewById(R.id.timePicker);
 
 		timePicker.setHour(hourd);
-		timePicker.setHour(minuted);
+		timePicker.setMinute(minuted);
 
 		EditText desc = mView.findViewById(R.id.desc);
 		desc.setText(Descriptiond);
@@ -176,43 +177,40 @@ public class MemoRVAdapter extends RecyclerView.Adapter<MemoRVAdapter.ViewHolder
 		}
 
 
-		monthET.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				String dayval = dayET.getEditableText().toString();
+		monthET.setOnItemClickListener((adapterView, view, i, l) -> {
+			String dayval = dayET.getEditableText().toString();
 
-				String[] daysPuagume5 = context.getResources().getStringArray(R.array.puagume5);
-				String[] daysPuagume6 = context.getResources().getStringArray(R.array.puagume6);
-				if (monthET.getText().toString().equals("ጳጉሜ")) {
-					if(!yearET.getEditText().getText().toString().equals("")){
-						if(Integer.parseInt(yearET.getEditText().getText().toString())%4 == 3) {
-							ArrayAdapter dayArrayAdapter = new ArrayAdapter(context, R.layout.dropdown_menu, daysPuagume6);
-							AutoCompleteTextView day = mView.findViewById(R.id.days);
-							day.setText(dayd);
-							day.setAdapter(dayArrayAdapter);
-							if(!day.equals("")){
-								if (Integer.parseInt(dayval) > 6) {
-									dayET.setText(dayET.getAdapter().getItem(5).toString(), false);
-								}
+			String[] daysPuagume51 = context.getResources().getStringArray(R.array.puagume5);
+			String[] daysPuagume61 = context.getResources().getStringArray(R.array.puagume6);
+			if (monthET.getText().toString().equals("ጳጉሜ")) {
+				if(!yearET.getEditText().getText().toString().equals("")){
+					if(Integer.parseInt(yearET.getEditText().getText().toString())%4 == 3) {
+						ArrayAdapter dayArrayAdapter = new ArrayAdapter(context, R.layout.dropdown_menu, daysPuagume61);
+						AutoCompleteTextView day = mView.findViewById(R.id.days);
+						day.setText(dayd);
+						day.setAdapter(dayArrayAdapter);
+						if(!day.equals("")){
+							if (Integer.parseInt(dayval) > 6) {
+								dayET.setText(dayET.getAdapter().getItem(5).toString(), false);
 							}
-						}else{
-							ArrayAdapter dayArrayAdapter = new ArrayAdapter(context, R.layout.dropdown_menu, daysPuagume5);
-							AutoCompleteTextView day = mView.findViewById(R.id.days);
-							day.setText(dayd);
-							day.setAdapter(dayArrayAdapter);
-							if(!dayval.equals("")){
-								if (Integer.parseInt(dayval) > 5) {
-									dayET.setText(dayET.getAdapter().getItem(4).toString(), false);
-								}
+						}
+					}else{
+						ArrayAdapter dayArrayAdapter = new ArrayAdapter(context, R.layout.dropdown_menu, daysPuagume51);
+						AutoCompleteTextView day = mView.findViewById(R.id.days);
+						day.setText(dayd);
+						day.setAdapter(dayArrayAdapter);
+						if(!dayval.equals("")){
+							if (Integer.parseInt(dayval) > 5) {
+								dayET.setText(dayET.getAdapter().getItem(4).toString(), false);
 							}
 						}
 					}
-				}else{
-					ArrayAdapter dayArrayAdapter = new ArrayAdapter(context, R.layout.dropdown_menu, days);
-					AutoCompleteTextView day = mView.findViewById(R.id.days);
-					day.setText(dayd);
-					day.setAdapter(dayArrayAdapter);
 				}
+			}else{
+				ArrayAdapter dayArrayAdapter = new ArrayAdapter(context, R.layout.dropdown_menu, days);
+				AutoCompleteTextView day = mView.findViewById(R.id.days);
+				day.setText(dayd);
+				day.setAdapter(dayArrayAdapter);
 			}
 		});
 		yearET.getEditText().addTextChangedListener(new TextWatcher() {
@@ -348,15 +346,12 @@ public class MemoRVAdapter extends RecyclerView.Adapter<MemoRVAdapter.ViewHolder
 					return;
 				}
 				dbHandler.updateCourse(id+"",day+"", month+"", year+"", hour+"", minute+"", ampm, description);
-synchronized (MemoRVAdapter.this){
-	MemoRVAdapter.this.notifyDataSetChanged();
-}
-
-				monthArrayAdapter.notifyDataSetChanged();
-
-
-
 				Toast.makeText(context, "Data has been updated.", Toast.LENGTH_SHORT).show();
+				
+				((AppCompatActivity) context).runOnUiThread(() -> {
+					MemoRVAdapter.this.notifyDataSetChanged();
+					//context.refreshInbox();
+				});
 
 				alertDialog.dismiss();
 			}
