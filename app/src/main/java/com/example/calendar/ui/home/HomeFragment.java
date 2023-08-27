@@ -844,10 +844,11 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                     TextView day = cl.findViewById(R.id.d);
                     day.setText(ind+1+"");
                     day.setTextColor(Color.parseColor("#000000"));
+//                    swipeToChange(day);
+
                     day.setOnClickListener(view -> {
                         btn_showMessage(cl,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
                     });
-                    swipeToChange(day);
 
                 }
             }
@@ -859,10 +860,11 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                         TextView day = cl.findViewById(R.id.d);
                         day.setText(ind+1+"");
                         day.setTextColor(Color.parseColor("#000000"));
+//                        swipeToChange(day);
+
                         day.setOnClickListener(view -> {
                             btn_showMessage(cl,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
                         });
-                        swipeToChange(day);
 
                     }
                 }
@@ -873,10 +875,11 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                         TextView day = cl.findViewById(R.id.d);
                         day.setText(ind+1+"");
                         day.setTextColor(Color.parseColor("#000000"));
+//                        swipeToChange(day);
+
                         day.setOnClickListener(view -> {
                             btn_showMessage(cl,value+" "+day.getText().toString()+" "+ yearInput.getText().toString(), key, value);
                         });
-                        swipeToChange(day);
                     }
                 }
             }
@@ -1266,11 +1269,6 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
                     }
                 });
 
-        v.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return gesture.onTouchEvent(event);
-            }
-        });
+        v.setOnTouchListener((v1, event) -> gesture.onTouchEvent(event));
     }
 }
