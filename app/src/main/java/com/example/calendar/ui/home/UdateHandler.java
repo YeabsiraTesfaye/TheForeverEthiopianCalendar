@@ -11,6 +11,7 @@ public class UdateHandler extends BroadcastReceiver {
             if (intent!=null && intent.getAction() != null && context != null) {
                 if ( (intent.getAction().equalsIgnoreCase(Intent.ACTION_MY_PACKAGE_REPLACED)) ||                        (Intent.ACTION_PACKAGE_REPLACED.equals(intent.getAction()) &&                                (intent.getData().getSchemeSpecificPart().equals(context.getPackageName())))) {
                     WidgetNotification.scheduleWidgetUpdate(context);
+
                 }
             }
         }catch (Exception e){e.printStackTrace();

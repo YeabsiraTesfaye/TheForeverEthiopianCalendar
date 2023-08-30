@@ -2,17 +2,24 @@ package com.example.calendar;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
+import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.example.calendar.ui.home.NewAppWidget;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,7 +36,6 @@ import com.example.calendar.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +84,38 @@ public class MainActivity extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
+        SharedPreferences prefs = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+
+        int ids[] = AppWidgetManager.getInstance(this).getAppWidgetIds(new ComponentName(this, NewAppWidget.class));
+//        Toast.makeText(this, "Number of widgets: "+prefs.getBoolean("asked",true), Toast.LENGTH_LONG).show();
+        if(ids.length == 1){
+            if(prefs.getBoolean("asked",false) == false){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    AppWidgetManager mAppWidgetManager = getSystemService(AppWidgetManager.class);
+
+                    ComponentName myProvider = new ComponentName(MainActivity.this, NewAppWidget.class);
+
+                    Bundle b = new Bundle();
+                    b.putString("ggg", "ggg");
+                    if (mAppWidgetManager.isRequestPinAppWidgetSupported()) {
+                        Intent pinnedWidgetCallbackIntent = new Intent(MainActivity.this, NewAppWidget.class);
+                        PendingIntent successCallback = PendingIntent.getBroadcast(MainActivity.this, 0,
+                                pinnedWidgetCallbackIntent, PendingIntent.FLAG_IMMUTABLE);
+
+                        mAppWidgetManager.requestPinAppWidget(myProvider, b, successCallback);
+                    }
+
+                }
+            }else{
+
+                SharedPreferences.Editor edit = prefs.edit();
+                edit.putBoolean("asked", true);
+                edit.commit();
+            }
+
+    }
+
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)

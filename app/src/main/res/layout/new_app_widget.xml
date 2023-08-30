@@ -5,17 +5,28 @@
     android:background="#00FFFFFF"
     android:theme="@style/Theme.Calendar.AppWidgetContainer">
 
+
     <TextView
         android:id="@+id/appwidget_text"
         style="@style/Widget.Calendar.AppWidget.InnerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:background="#70292626"
+        android:background="#20000000"
         android:contentDescription="@string/app_name"
         android:gravity="center"
         android:text="@string/app_name"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
+
+    <ImageButton
+        android:layout_alignRight="@id/appwidget_text"
+        android:id="@+id/refreshDAte"
+        android:layout_width="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="30dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/baseline_refresh_24" />
 </RelativeLayout>

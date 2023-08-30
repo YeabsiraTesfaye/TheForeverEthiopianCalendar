@@ -6,13 +6,18 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.widget.ImageButton;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.example.calendar.MainActivity;
 import com.example.calendar.R;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Implementation of App Widget functionality.
@@ -21,10 +26,15 @@ public class NewAppWidget extends AppWidgetProvider {
 
     public static final String ACTION_AUTO_UPDATE =
             "com.example.exampleWidget.AUTO_UPDATE";
+    private static final String MyOnClick1 = "myOnClickTag1";
 
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
+        if (MyOnClick1.equals(intent.getAction())) {
+            // your onClick action is here
+            onUpdate(context);
+        }
         if(intent!=null && intent.getAction()!=null &&
                 intent.getAction().equals(ACTION_AUTO_UPDATE)){
             onUpdate(context);
@@ -44,17 +54,40 @@ public class NewAppWidget extends AppWidgetProvider {
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
+
     }
 
     @Override
     public void onEnabled(Context context) {
         super.onEnabled(context);
-        WidgetNotification.scheduleWidgetUpdate(context);
+//        WidgetNotification.scheduleWidgetUpdate(context);
     }
 
     private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         //CODE TO UPDATE YOUR WIDGET VIEW
-        toET(context, appWidgetManager, appWidgetId);
+        final Handler handler = new Handler();
+        Timer timer = new Timer();
+        TimerTask doAsynchronousTask = new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(new Runnable() {
+                    public void run() {
+                        try {
+                            toET(context, appWidgetManager, appWidgetId);
+                            System.out.println(timer);
+                            //your method here
+                        } catch (Exception e) {
+                        }
+                    }
+                });
+            }
+        };
+        timer.schedule(doAsynchronousTask, 0, 1000); //execute in every minutes
+
+
+//        toET(context, appWidgetManager, appWidgetId);
+//        System.out.println("here");
+
     }
 
     @Override
@@ -69,7 +102,7 @@ public class NewAppWidget extends AppWidgetProvider {
         WidgetNotification.clearWidgetUpdate(context);
     }
 
-    public static void toET(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
+    public void toET(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
         HashMap<Integer, String> monthsET = new HashMap<>();
 
@@ -83,7 +116,7 @@ public class NewAppWidget extends AppWidgetProvider {
         monthsET.put(8, "ሚያዚያ");
         monthsET.put(9, "ግንቦት");
         monthsET.put(10, "ሰኔ");
-        monthsET.put(11, "ምሌ");
+        monthsET.put(11, "ሐምሌ");
         monthsET.put(12, "ነሀሴ");
         monthsET.put(13, "ጳጉሜ");
 
@@ -499,11 +532,16 @@ public class NewAppWidget extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.appwidget_text,
                 PendingIntent.getActivity(context, 0, new Intent(context, MainActivity.class), PendingIntent.FLAG_IMMUTABLE));
 
+        views.setOnClickPendingIntent(R.id.refreshDAte, getPendingSelfIntent(context, MyOnClick1));
+
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-
-
+    protected PendingIntent getPendingSelfIntent(Context context, String action) {
+        Intent intent = new Intent(context, getClass());
+        intent.setAction(action);
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+    }
 
 }
