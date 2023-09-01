@@ -2,6 +2,7 @@ package com.example.calendar;
 
 import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
@@ -36,6 +38,7 @@ import com.example.calendar.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    @SuppressLint("StaticFieldLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,35 +87,45 @@ public class MainActivity extends AppCompatActivity {
             Window w = getWindow();
             w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
-        SharedPreferences prefs = getSharedPreferences("MySharedPref",MODE_PRIVATE);
-
+        SharedPreferences pref = this.getSharedPreferences("PACKAGE.NAME",MODE_PRIVATE);
+        Boolean firstTime = pref.getBoolean("firstTime",true);
 
         int ids[] = AppWidgetManager.getInstance(this).getAppWidgetIds(new ComponentName(this, NewAppWidget.class));
-//        Toast.makeText(this, "Number of widgets: "+prefs.getBoolean("asked",true), Toast.LENGTH_LONG).show();
-        if(ids.length == 1){
-            if(prefs.getBoolean("asked",false) == false){
+
+        if(ids.length == 0 && firstTime){
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     AppWidgetManager mAppWidgetManager = getSystemService(AppWidgetManager.class);
-
                     ComponentName myProvider = new ComponentName(MainActivity.this, NewAppWidget.class);
-
                     Bundle b = new Bundle();
                     b.putString("ggg", "ggg");
                     if (mAppWidgetManager.isRequestPinAppWidgetSupported()) {
                         Intent pinnedWidgetCallbackIntent = new Intent(MainActivity.this, NewAppWidget.class);
                         PendingIntent successCallback = PendingIntent.getBroadcast(MainActivity.this, 0,
                                 pinnedWidgetCallbackIntent, PendingIntent.FLAG_IMMUTABLE);
-
                         mAppWidgetManager.requestPinAppWidget(myProvider, b, successCallback);
+
                     }
 
-                }
-            }else{
 
-                SharedPreferences.Editor edit = prefs.edit();
-                edit.putBoolean("asked", true);
-                edit.commit();
-            }
+                }
+
+            new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    try {
+                        Thread.sleep(4000);
+                        runOnUiThread(() -> pref.edit().putBoolean("firstTime",false).apply());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    return null;
+                }
+
+
+            }.execute();
+
+
 
     }
 

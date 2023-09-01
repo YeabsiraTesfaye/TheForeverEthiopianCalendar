@@ -112,11 +112,7 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
         scrollView = root.findViewById(R.id.scrollVIew);
         increase = root.findViewById(R.id.increase);
         decrease = root.findViewById(R.id.decrease);
-        swipeToChange(scrollView);
-        // Now Create Animator Object
-        // For this we add animator folder inside res
-        // Now we will add the animator to our card
-        // we now need to modify the camera scale
+//        swipeToChange(scrollView);
         float scale = getContext().getResources().getDisplayMetrics().density;
 
         View front = root.findViewById(R.id.front);
@@ -125,54 +121,47 @@ public class HomeFragment extends Fragment implements ToolTipsManager.TipListene
 
         front.setCameraDistance(8000 * scale);
         back.setCameraDistance(8000 * scale);
-
-
-        // Now we will set the front animation
         front_anim = AnimatorInflater.loadAnimator(getContext(), R.animator.front_animator);
         back_anim = AnimatorInflater.loadAnimator(getContext(), R.animator.back_animator);
 
-        // Now we will set the event listener
-        flip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isFront)
-                {
-                    front_anim.setTarget(front);
-                    back_anim.setTarget(back);
-                    front_anim.start();
-                    back_anim.start();
-                    isFront = false;
-                    Handler handler = new Handler();
-                    Runnable runnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            front.setVisibility(View.INVISIBLE);
+        flip.setOnClickListener(view -> {
+            if(isFront)
+            {
+                front_anim.setTarget(front);
+                back_anim.setTarget(back);
+                front_anim.start();
+                back_anim.start();
+                isFront = false;
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        front.setVisibility(View.INVISIBLE);
 //                            back.setVisibility(View.VISIBLE);
-                            flip.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.baseline_calendar_month_24));
-                        }
-                    };
-                    handler.postDelayed(runnable, 500);
+                        flip.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.baseline_calendar_month_24));
+                    }
+                };
+                handler.postDelayed(runnable, 500);
 
-                }
-                else
-                {
-                    front_anim.setTarget(back);
-                    back_anim.setTarget(front);
-                    back_anim.start();
-                    front_anim.start();
-                    isFront =true;
-                    Handler handler = new Handler();
-                    Runnable runnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            front.setVisibility(View.VISIBLE);
+            }
+            else
+            {
+                front_anim.setTarget(back);
+                back_anim.setTarget(front);
+                back_anim.start();
+                front_anim.start();
+                isFront =true;
+                Handler handler = new Handler();
+                Runnable runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        front.setVisibility(View.VISIBLE);
 //                            back.setVisibility(View.INVISIBLE);
-                            flip.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.cross));
+                        flip.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.cross));
 
-                        }
-                    };
-                    handler.postDelayed(runnable, 500);
-                }
+                    }
+                };
+                handler.postDelayed(runnable, 500);
             }
         });
 
