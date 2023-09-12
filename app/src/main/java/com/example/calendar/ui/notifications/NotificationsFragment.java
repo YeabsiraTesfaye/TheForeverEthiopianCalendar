@@ -219,31 +219,47 @@ public class NotificationsFragment extends Fragment {
                     day = todaysDay + 25;
                     year = todaysYear - 8;
                 }
-                if (thisYear % 4 == 3) {
+                if (todaysYear % 4 == 3) {
                     if (todaysDay > 5 && todaysDay <= 11) {
                         month = 13;
-                        day = (todaysDay + 25) % 30;
+                        day = (todaysDay + 26) % 30;
+                        System.out.println("here "+day);
+
                         if (day == 0) {
-                            day = 5;
+                            day = 6;
                         }
+                        year = todaysYear - 8;
                     }
-                    year = todaysYear - 8;
+                    else if (todaysDay > 11) {
+                        month = 1;
+                        day = (todaysDay + 25) % 30 - 5;
+                        if (day == 0) {
+                            day = 30;
+                        }
+                        year = todaysYear - 7;
+                    }
+
                 } else {
-                    month = 13;
-                    day = (todaysDay + 25) % 30;
-                    if (day == 0) {
-                        day = 5;
+                    System.out.println("here2");
+
+                    if (todaysDay > 5 && todaysDay <= 10) {
+                        month = 13;
+                        day = (todaysDay + 25) % 6;
+                        if (day == 0) {
+                            day = 6;
+                        }
+                        year = todaysYear - 8;
                     }
-                    year = todaysYear - 8;
-                }
-                if (todaysDay > 10) {
-                    month = 1;
-                    day = (todaysDay + 25) % 30 - 5;
-                    if (day == 0) {
-                        day = 30;
+                    else if (todaysDay > 10) {
+                        month = 1;
+                        day = (todaysDay + 25) % 30 - 5;
+                        if (day == 0) {
+                            day = 30;
+                        }
+                        year = todaysYear - 7;
                     }
-                    year = todaysYear - 7;
                 }
+
             }
             if (todaysMonth == 10) {
                 if (todaysDay >= 1 && todaysDay <= 9) {
