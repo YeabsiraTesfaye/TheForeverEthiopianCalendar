@@ -176,20 +176,20 @@ public class NewAppWidget extends AppWidgetProvider {
             }
 
             if(todaysMonth == 2){
-                if(todaysDay >= 1 && todaysDay <= 6){
+                if(todaysDay >= 1 && todaysDay <= 7){
                     month = 5;
                     day = todaysDay + 23;
-                }else if(todaysDay > 6){
+                }else if(todaysDay > 7){
                     month = 6;
                     day = (todaysDay + 23)%30;
                 }
                 year = todaysYear-8;
             }
             if(todaysMonth == 3){
-                if(todaysDay >= 1 && todaysDay <= 8){
+                if(todaysDay >= 1 && todaysDay <= 9){
                     month = 6;
                     day = todaysDay + 21;
-                }else if(todaysDay > 8){
+                }else if(todaysDay > 9){
                     month = 7;
                     day = (todaysDay + 21)%30;
                 }
@@ -197,10 +197,10 @@ public class NewAppWidget extends AppWidgetProvider {
             }
 
             if(todaysMonth == 4){
-                if(todaysDay >= 1 && todaysDay <= 7){
+                if(todaysDay >= 1 && todaysDay <= 8){
                     month = 7;
                     day = todaysDay + 22;
-                }else if(todaysDay > 7){
+                }else if(todaysDay > 8){
                     month = 8;
                     day = (todaysDay + 22)%30;
                     if(day == 0){
@@ -210,7 +210,7 @@ public class NewAppWidget extends AppWidgetProvider {
                 year = todaysYear-8;
             }
             if(todaysMonth == 5){
-                if(todaysDay >= 1 && todaysDay <= 7){
+                if(todaysDay >= 1 && todaysDay <= 8){
                     month = 8;
                     day = todaysDay + 22;
                 }else if(todaysDay > 8){
@@ -224,10 +224,10 @@ public class NewAppWidget extends AppWidgetProvider {
             }
 
             if(todaysMonth == 6){
-                if(todaysDay >= 1 && todaysDay <= 6){
+                if(todaysDay >= 1 && todaysDay <= 7){
                     month = 9;
                     day = todaysDay + 23;
-                }else if(todaysDay > 6){
+                }else if(todaysDay > 7){
                     month = 10;
                     day = (todaysDay + 23)%30;
                     if(day == 0){
@@ -237,10 +237,10 @@ public class NewAppWidget extends AppWidgetProvider {
                 year = todaysYear-8;
             }
             if(todaysMonth == 7){
-                if(todaysDay >= 1 && todaysDay <= 6){
+                if(todaysDay >= 1 && todaysDay <= 7){
                     month = 10;
                     day = todaysDay + 23;
-                }else if(todaysDay > 6){
+                }else if(todaysDay > 7){
                     month = 11;
                     day = (todaysDay + 23)%30;
                     if(day == 0){
@@ -309,10 +309,10 @@ public class NewAppWidget extends AppWidgetProvider {
 
             }
             if(todaysMonth == 10){
-                if(todaysDay >= 1 && todaysDay <= 9){
+                if(todaysDay >= 1 && todaysDay <= 11){
                     month = 1;
                     day = todaysDay + 20;
-                }else if(todaysDay >9){
+                }else if(todaysDay >11){
                     month = 2;
                     day = (todaysDay + 20)%30;
                     if(day == 0){
@@ -322,10 +322,10 @@ public class NewAppWidget extends AppWidgetProvider {
                 year = todaysYear-7;
             }
             if(todaysMonth == 11){
-                if(todaysDay >= 1 && todaysDay <= 8){
+                if(todaysDay >= 1 && todaysDay <= 10){
                     month = 2;
                     day = todaysDay + 21;
-                }else if(todaysDay >8){
+                }else if(todaysDay >10){
                     month = 3;
                     day = (todaysDay + 21)%30;
                     if(day == 0){
@@ -335,10 +335,10 @@ public class NewAppWidget extends AppWidgetProvider {
                 year = todaysYear-7;
             }
             if(todaysMonth == 12){
-                if(todaysDay >= 1 && todaysDay <= 8){
+                if(todaysDay >= 1 && todaysDay <= 10){
                     month = 3;
                     day = todaysDay + 21;
-                }else if(todaysDay >8){
+                }else if(todaysDay >10){
                     month = 4;
                     day = (todaysDay + 21)%30;
                     if(day == 0){
@@ -526,10 +526,10 @@ public class NewAppWidget extends AppWidgetProvider {
                 year = todaysYear-7;
             }
             if(todaysMonth == 12){
-                if(todaysDay >= 1 && todaysDay <= 8){
+                if(todaysDay >= 1 && todaysDay <= 9){
                     month = 3;
                     day = todaysDay + 21;
-                }else if(todaysDay >8){
+                }else if(todaysDay >9){
                     month = 4;
                     day = (todaysDay + 21)%30;
                     if(day == 0){
